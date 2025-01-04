@@ -32,10 +32,11 @@ spec:
   path: ./infrastructure/configs
   prune: true
   patches:
+    # TODO CHANGEMEhttps://acme-v02.api.letsencrypt.org/directory
     - patch: |
         - op: replace
           path: /spec/acme/server
-          value: https://acme-v02.api.letsencrypt.org/directory
+          value: https://acme-staging-v02.api.letsencrypt.org/directory
       target:
         kind: ClusterIssuer
         name: letsencrypt
