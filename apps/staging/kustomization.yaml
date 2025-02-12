@@ -3,6 +3,8 @@ kind: Kustomization
 namespace: podinfo
 resources:
   - ../base/podinfo
+  - ../base/rook
+  - ../base/nextcloud
 patches:
   - path: podinfo-values.yaml
     target:
