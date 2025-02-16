@@ -4,6 +4,7 @@ resources:
   - ../base/podinfo
   - ../base/rook
   - ../base/nextcloud
+  - rook-cluster.yaml
 patches:
   - path: podinfo-values.yaml
     target:
