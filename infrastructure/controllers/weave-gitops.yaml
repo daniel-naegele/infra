@@ -38,4 +38,8 @@ spec:
       create: true
       passwordHash: $2a$10$mf/vrByOsn5cyzwUYFVyS.eB6TJ4S69aXmZUKnN578bZcbm90V5J6
       username: admin
-
+    ingress:
+      enabled: true
+      className: nginx
+      hosts:
+        - host: weave.staging
