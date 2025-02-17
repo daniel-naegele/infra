@@ -33,3 +33,5 @@ spec:
     ingress:
       enabled: true
       ingressClassName: nginx
+      hosts:
+        - monitoring.staging
