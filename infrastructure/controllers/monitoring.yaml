@@ -30,8 +30,9 @@ spec:
         namespace: monitoring
       interval: 12h
   values:
-    ingress:
-      enabled: true
-      ingressClassName: nginx
-      hosts:
-        - monitoring.staging
+    grafana:
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - grafana.staging

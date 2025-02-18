@@ -43,3 +43,6 @@ spec:
       className: nginx
       hosts:
         - host: weave.staging
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
