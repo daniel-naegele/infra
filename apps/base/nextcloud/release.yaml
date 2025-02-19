@@ -23,25 +23,7 @@ spec:
         nginx.ingress.kubernetes.io/affinity: cookie
     nextcloud:
       host: nextcloud.staging
-    redis:
-      enabled: true
-    cronjob:
-      enabled: true
-    internalDatabase:
-      enabled: false
-    externalDatabase:
-      enabled: true
-      type: postgresql
-      existingSecret:
-        enabled: true
-        secretName: nextcloud-cluster-app
-        usernameKey: username
-        passwordKey: password
-        hostKey: host
-        databaseKey: dbname
-    metrics:
-      enabled: true
-    configs:
+      configs:
       other.config.php: |-
         <?php
         $CONFIG = array (
@@ -91,3 +73,21 @@ spec:
           'memories.exiftool_no_local' => true,
           'memories.gis_type' => 1,
         );
+    redis:
+      enabled: true
+    cronjob:
+      enabled: true
+    internalDatabase:
+      enabled: false
+    externalDatabase:
+      enabled: true
+      type: postgresql
+      existingSecret:
+        enabled: true
+        secretName: nextcloud-cluster-app
+        usernameKey: username
+        passwordKey: password
+        hostKey: host
+        databaseKey: dbname
+    metrics:
+      enabled: true
