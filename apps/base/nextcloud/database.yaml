@@ -7,6 +7,8 @@ spec:
   instances: 1
   storage:
     size: 1Gi
+  monitoring:
+    enablePodMonitor: true
   managed:
     roles:
       - name: nextcloud
