@@ -4,8 +4,11 @@ resources:
   - ../base/podinfo
   - ../base/rook
   - ../base/nextcloud
+  - ../base/jellyfin
   - rook-cluster.yaml
 patches:
   - path: podinfo-values.yaml
     target:
       kind: HelmRelease
+      name: podinfo
+

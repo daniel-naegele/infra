@@ -3,7 +3,9 @@ kind: Kustomization
 resources:
   - ../base/podinfo
   - ../base/nextcloud
+  - ../base/jellyfin
 patches:
   - path: podinfo-values.yaml
     target:
       kind: HelmRelease
+      name: podinfo
