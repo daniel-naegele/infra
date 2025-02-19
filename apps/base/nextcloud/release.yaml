@@ -91,3 +91,8 @@ spec:
         databaseKey: dbname
     metrics:
       enabled: true
+      info:
+        apps: true
+      serviceMonitor:
+        enabled: true
+        namespace: monitoring
