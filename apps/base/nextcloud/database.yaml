@@ -11,12 +11,9 @@ spec:
     enablePodMonitor: true
   managed:
     roles:
-      - name: nextcloud
-        ensure: present
-        comment: Nextcloud User
+      - name: app
+        createdb: true
         login: true
-        superuser: false
-
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Database
@@ -25,6 +22,6 @@ metadata:
   namespace: nextcloud
 spec:
   name: nextcloud
-  owner: nextcloud
+  owner: app
   cluster:
     name: nextcloud-cluster

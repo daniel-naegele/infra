@@ -32,8 +32,13 @@ spec:
     externalDatabase:
       enabled: true
       type: postgresql
-      host: nextcloud-cluster-rw:5432
-
+      existingSecret:
+        enabled: true
+        secretName: nextcloud-cluster-app
+        usernameKey: username
+        passwordKey: password
+        hostKey: host
+        databaseKey: dbname
     metrics:
       enabled: true
     configs:
@@ -86,4 +91,3 @@ spec:
           'memories.exiftool_no_local' => true,
           'memories.gis_type' => 1,
         );
-
