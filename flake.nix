@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
   outputs =
@@ -32,6 +31,7 @@
           nameValuePair hostname (nixosSystem {
             inherit system;
             modules = [
+              disko.nixosModules.disko
               (
                 {
                   inputs,
@@ -95,10 +95,16 @@
       {
         devShells.default = import ./shell.nix { inherit pkgs; };
         formatter = pkgs.nixfmt-rfc-style;
-       nixosHostConfigurations = mapAttrs' mkNixOsConfiguration {
-               de-man-backup = { system = "x86_64-linux"; config = ./nixos/nuc.nix; username = "daniel"; };
-               Daniel-PC = { system = "x86_64-linux"; config = ./nixos/wsl.nix; username = "nixos"; };
-       };
+        nixosHostConfigurations = mapAttrs' mkNixOsConfiguration {
+          de-man-backup = {
+            system = "x86_64-linux";
+            config = ./nixos/nuc.nix;
+          };
+          Daniel-PC = {
+            system = "x86_64-linux";
+            config = ./nixos/wsl.nix;
+          };
+        };
       }
     );
 }
