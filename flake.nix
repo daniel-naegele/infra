@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
   outputs =
@@ -21,17 +22,16 @@
           config.allowUnfree = true;
           config.allowUnsupportedSystem = true;
         };
+
         mkNixOsConfiguration =
           hostname:
           {
             system,
             config,
-            username,
           }:
           nameValuePair hostname (nixosSystem {
             inherit system;
             modules = [
-              nixos-wsl.nixosModules.wsl
               (
                 {
                   inputs,
@@ -85,17 +85,6 @@
                 }
               )
               (import config)
-              inputs.home-manager.nixosModules.home-manager
-              {
-                home-manager.useUserPackages = true;
-                home-manager.useGlobalPkgs = true;
-                home-manager.backupFileExtension = "backup";
-                home-manager.users.${username} = homeManagerConfigurations."${hostname}";
-                home-manager.extraSpecialArgs = {
-                  inherit hostname inputs;
-                  unstable = unstableBySystem."${system}";
-                };
-              }
             ];
             specialArgs = {
               inherit hostname inputs;
@@ -106,6 +95,10 @@
       {
         devShells.default = import ./shell.nix { inherit pkgs; };
         formatter = pkgs.nixfmt-rfc-style;
+       nixosHostConfigurations = mapAttrs' mkNixOsConfiguration {
+               de-man-backup = { system = "x86_64-linux"; config = ./nixos/nuc.nix; username = "daniel"; };
+               Daniel-PC = { system = "x86_64-linux"; config = ./nixos/wsl.nix; username = "nixos"; };
+       };
       }
     );
 }
