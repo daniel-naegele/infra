@@ -6,6 +6,8 @@ mkShell {
   buildInputs = [
     flux
     kubectl
+    sops
+    age
   ];
 
   shellHook = ''

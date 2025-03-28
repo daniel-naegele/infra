@@ -15,6 +15,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./configuration.nix
-    ./hardware-configuration.nix
+    ./nuc-hardware-configuration.nix
+    ./k8s-server.nix
   ];
 }

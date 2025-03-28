@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    sops-nix.url = "github:Mic92/sops-nix";
+    disko.url = "github:nix-community/disko";
   };
 
   outputs =
@@ -11,6 +13,8 @@
       self,
       nixpkgs,
       flake-utils,
+      sops-nix,
+      disko,
     }:
     flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (
       system:
@@ -31,6 +35,7 @@
           nameValuePair hostname (nixosSystem {
             inherit system;
             modules = [
+              sops-nix.nixosModules.sops
               disko.nixosModules.disko
               (
                 {
@@ -93,10 +98,10 @@
           });
       in
       {
-        devShells.default = import ./shell.nix { inherit pkgs; };
+        devShell = import ./shell.nix { inherit pkgs; };
         formatter = pkgs.nixfmt-rfc-style;
         nixosHostConfigurations = mapAttrs' mkNixOsConfiguration {
-          de-man-backup = {
+          de-man1-01 = {
             system = "x86_64-linux";
             config = ./nixos/nuc.nix;
           };
