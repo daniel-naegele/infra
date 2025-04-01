@@ -19,6 +19,8 @@
   boot.kernelModules = [ "ceph" ];
   sops.defaultSopsFile = ./../secrets/secrets.yaml;
 
+  programs.zsh.enable = true;
+
   environment.systemPackages = with pkgs; [
     cachix
     git
@@ -30,6 +32,7 @@
   ];
 
   users.users.nixos = {
+    shell = pkgs.zsh;
     isSystemUser = true;
     group = "nixos";
     openssh.authorizedKeys.keys = [
