@@ -7,10 +7,8 @@
 }:
 {
   imports = [
-    <sops-nix/modules/sops>
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
-    ./disk-config.nix
   ];
   boot.loader.grub = {
     # no need to set devices, disko will add all devices that have a EF02 partition to the list already
@@ -19,7 +17,6 @@
     efiInstallAsRemovable = true;
   };
   boot.kernelModules = [ "ceph" ];
-  services.openssh.enable = true;
   sops.defaultSopsFile = ./../secrets/secrets.yaml;
 
   environment.systemPackages = with pkgs; [
@@ -32,11 +29,22 @@
     tailscale
   ];
 
-  users.users.nixos.openssh.authorizedKeys.keys = [
+  users.users.nixos = {
+    isSystemUser = true;
+    group = "nixos";
+    openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII4FqdxzINQfwBVADBQPKO56ClKP3ToxvGALzjzGOTlD daniel@DN-Laptop"
   ];
+  };
+  users.groups.nixos = {};
 
-  networking.useDHCP = lib.mkDefault true;
+services.openssh = {
+  enable = true;
+  # require public key authentication for better security
+  settings.PasswordAuthentication = false;
+  settings.KbdInteractiveAuthentication = false;
+  settings.PermitRootLogin = "no";
+};
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }

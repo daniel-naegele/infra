@@ -3,19 +3,16 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  name,
-  config,
-  pkgs,
-  inputs,
-  lib,
   ...
 }:
 
 {
   imports = [
     # Include the results of the hardware scan.
+
+    ./disk-config.nix
     ./configuration.nix
     ./nuc-hardware-configuration.nix
-    ./k8s-server.nix
+    #./k8s-server.nix
   ];
 }

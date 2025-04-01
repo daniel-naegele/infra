@@ -1,7 +1,7 @@
 {
-  pkgs ? import <nixpkgs> { },
+  nixpkgs ? import <nixpkgs> { },
 }:
-with pkgs;
+with nixpkgs;
 mkShell {
   buildInputs = [
     flux
