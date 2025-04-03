@@ -9,7 +9,7 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
-    #./initrd-tailscale.nix
+    ./initrd-tailscale.nix
   ];
 
   boot.kernelParams = [ "ip=dhcp" ];
@@ -29,28 +29,33 @@
     };
   };
 
+  sops.secrets.init_host_key = {
+    mode = "0600";
+  };
   boot.initrd = {
     availableKernelModules = [ "igc" ];
     kernelModules = [ "e1000e" "iwlwifi" "tpm_crb" ];
-    secrets = { "/etc/secrets/ssh_host_ed_25519_key" =
-      ../id;
-    }
-    ;
+    secrets = {
+      "/etc/secrets/ssh_host_ed_25519_key" = /run/secrets/init_host_key;
+    };
 
     systemd = {
+      initrdBin = with pkgs; [
+        iptables iproute2 tailscale gnutar
+      ];
       enable = true;
       emergencyAccess = "$6$Q9squq6JffqBotsn$G2oqvxWg2PS6tJFzplu/ycjmFzNRwF.uX5EPQJI12wQhs75lFYSpGbf/EG6L7CdOtfvHUiBMX.t4y0vXYTlbT.";
 
       network = {
         enable = true;
-        networks."20-enp0s25" = {
+        networks."10-lan" = {
           enable = true;
           matchConfig = {
-                        Name = "enp0s25";  # Matches the network interface by name
-                      };
-                      networkConfig = {
-
-                      };
+            Name = "enp0s25";  # Matches the network interface by name
+          };
+          networkConfig = {
+            DHCP = "yes";
+          };
         };
       };
 
@@ -83,14 +88,13 @@
          # the keys are copied to initrd from the path specified; multiple keys can be set
          # you can generate any number of host keys using
          # `ssh-keygen -t ed25519 -N "" -f /path/to/ssh_host_ed25519_key`
-         hostKeys = [ ../id ];
+         hostKeys = [ /run/secrets/init_host_key ];
          # public ssh key used for login
-         authorizedKeys = [
-           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII4FqdxzINQfwBVADBQPKO56ClKP3ToxvGALzjzGOTlD daniel@DN-Laptop"
+         authorizedKeyFiles = [
+          ../secrets/authorized_keys
          ];
        };
     };
-
   };
 
   programs.zsh.enable = true;
@@ -119,11 +123,10 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     group = "nixos";
-    extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII4FqdxzINQfwBVADBQPKO56ClKP3ToxvGALzjzGOTlD daniel@DN-Laptop"
-    ];
+    extraGroups = [ "wheel" "sudo" ];
+    openssh.authorizedKeys.keyFiles = [ ../secrets/authorized_keys ];
   };
+  nix.settings.trusted-users = [ "nixos" ];
 
   users.groups.k8s =  {};
   users.groups.nixos = {};
