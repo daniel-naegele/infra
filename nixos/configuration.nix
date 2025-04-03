@@ -13,7 +13,7 @@
   ];
 
   boot.kernelParams = [ "ip=dhcp" ];
-  boot.kernelModules = [ "ceph" "r8169" "cdc_ether" ];
+  boot.kernelModules = [ "ceph" "e1000e" "iwlwifi" ];
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.requestEncryptionCredentials = true;
 
@@ -31,7 +31,11 @@
 
   boot.initrd = {
     availableKernelModules = [ "igc" ];
-    kernelModules = [ "r8169" "cdc_ether" "tpm_crb" ];
+    kernelModules = [ "e1000e" "iwlwifi" "tpm_crb" ];
+    secrets = { "/etc/secrets/ssh_host_ed_25519_key" =
+      ../id;
+    }
+    ;
 
     systemd = {
       enable = true;
@@ -39,10 +43,14 @@
 
       network = {
         enable = true;
-        networks.enp0s25 = {
+        networks."20-enp0s25" = {
           enable = true;
-          name = "enp0s25";
-          DHCP = "yes";
+          matchConfig = {
+                        Name = "enp0s25";  # Matches the network interface by name
+                      };
+                      networkConfig = {
+
+                      };
         };
       };
 
@@ -93,6 +101,7 @@
     clevis
     git
     htop
+    iproute2
     openssh
     vim
     wget
