@@ -2,17 +2,24 @@
   description = "NixOS configuration";
 
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     sops-nix.url = "github:Mic92/sops-nix";
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
-    nixos-hardware.url = github:NixOS/nixos-hardware;
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
   };
 
   # Taken from https://github.com/davidtwco/veritas/blob/master/flake.nix
   outputs = { self, nixpkgs, sops-nix, disko, ... }@inputs:
     with inputs.nixpkgs.lib;
     let
+
+    supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
+    forEachSupportedSystem = f: genAttrs supportedSystems (system: f {
+      pkgs = import nixpkgs {
+        inherit system;
+      };
+    });
 
       mkNixOsConfiguration = hostname: { system, config }:
         nameValuePair hostname (nixosSystem {
@@ -55,14 +62,19 @@
         });
 
 
+      mkDevShells = forEachSupportedSystem ({ pkgs }: {
+        default = import ./shell.nix pkgs;
+      });
+
       # Attribute set of hostnames to evaluated NixOS configurations. Consumed by `nixos-rebuild`
       # on those hosts.
       nixosHostConfigurations = mapAttrs' mkNixOsConfiguration {
-        de-man1-01 = { system = "x86_64-linux"; config = ./nixos/nuc.nix; };
+        de-man1-01 = { system = "x86_64-linux"; config = ./nixos/nuc/nuc.nix; };
       };
     in
     {
         formatter = nixpkgs.nixfmt-rfc-style;
         nixosConfigurations = nixosHostConfigurations;
+        devShells = mkDevShells;
     };
 }

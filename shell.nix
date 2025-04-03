@@ -1,9 +1,10 @@
 {
-  nixpkgs ? import <nixpkgs> { },
+  pkgs ? import <nixpkgs> { },
+  ...
 }:
-with nixpkgs;
+with pkgs;
 mkShell {
-  buildInputs = [
+  packages = [
     flux
     kubectl
     sops
