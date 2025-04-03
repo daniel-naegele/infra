@@ -7,10 +7,14 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # Taken from https://github.com/davidtwco/veritas/blob/master/flake.nix
-  outputs = { self, nixpkgs, sops-nix, disko, ... }@inputs:
+  outputs = { self, nixpkgs, sops-nix, disko, nixos-generators, ... }@inputs:
     with inputs.nixpkgs.lib;
     let
 
@@ -76,5 +80,6 @@
         formatter = nixpkgs.nixfmt-rfc-style;
         nixosConfigurations = nixosHostConfigurations;
         devShells = mkDevShells;
+        packages.x86_64-linux.installationMedia = mkImage "install-iso" [ ./nixos/installer-image.nix ];
     };
 }
