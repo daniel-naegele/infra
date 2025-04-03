@@ -4,8 +4,10 @@
 # for a more complex example.
 keys:
   - &admin_daniel age1yvcq2p43h023m8ds5qjyc96p48kd4p4f8f7hux8dsjcv7tfehvaqjut87h
+  - &machine_nuc age1rgj4aealpywn2n4napf2smla40nnhgs9jgy8me9f0p2z7ysxyffsjpzr8p
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
-      -  age:
+      - age:
           - *admin_daniel
+          - *machine_nuc
