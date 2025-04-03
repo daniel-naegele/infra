@@ -5,14 +5,16 @@
 {
   ...
 }:
-
 {
   imports = [
     # Include the results of the hardware scan.
-
     ./disk-config.nix
-    ./configuration.nix
-    ./nuc-hardware-configuration.nix
+    ../configuration.nix
+    ./hardware-configuration.nix
     #./k8s-server.nix
   ];
+
+  sops.defaultSopsFile = ../../secrets/nuc.yaml;
+
+  networking.hostId = "2054d6cd";
 }
