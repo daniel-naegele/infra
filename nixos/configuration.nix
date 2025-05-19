@@ -29,14 +29,16 @@
     };
   };
 
-  sops.secrets.init_host_key = {
-    mode = "0600";
+  sops.secrets = {
+    tailscale_preauth = { mode = "0600"; };
+    init_host_key = { mode = "0600"; };
   };
   boot.initrd = {
     availableKernelModules = [ "igc" ];
     kernelModules = [ "e1000e" "iwlwifi" "tpm_crb" ];
     secrets = {
       "/etc/secrets/ssh_host_ed_25519_key" = /run/secrets/init_host_key;
+      "/etc/secrets/ts_auth_key" = /run/secrets/tailscale_preauth;
     };
 
     systemd = {
