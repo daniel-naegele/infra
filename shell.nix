@@ -9,6 +9,7 @@ mkShell {
     kubectl
     sops
     age
+    headscale
   ];
 
   shellHook = ''
