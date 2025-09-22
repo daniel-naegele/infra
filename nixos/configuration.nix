@@ -13,29 +13,34 @@
   ];
 
   boot.kernelParams = [ "ip=dhcp" ];
-  boot.kernelModules = [ "ceph" "e1000e" "iwlwifi" ];
+  boot.kernelModules = [
+    "ceph"
+    "e1000e"
+    "iwlwifi"
+  ];
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.requestEncryptionCredentials = true;
 
-  boot.loader =  {
-    grub = {
-      enable = true;
-      zfsSupport = true;
-      efiSupport = true;
-      efiInstallAsRemovable = true;
-      mirroredBoots = [
-        { devices = [ "nodev"]; path = "/boot"; }
-      ];
-    };
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
   };
 
   sops.secrets = {
-    tailscale_preauth = { mode = "0600"; };
-    init_host_key = { mode = "0600"; };
+    tailscale_preauth = {
+      mode = "0600";
+    };
+    init_host_key = {
+      mode = "0600";
+    };
   };
   boot.initrd = {
     availableKernelModules = [ "igc" ];
-    kernelModules = [ "e1000e" "iwlwifi" "tpm_crb" ];
+    kernelModules = [
+      "e1000e"
+      "iwlwifi"
+      "tpm_crb"
+    ];
     secrets = {
       "/etc/secrets/ssh_host_ed_25519_key" = /run/secrets/init_host_key;
       "/etc/secrets/ts_auth_key" = /run/secrets/tailscale_preauth;
@@ -43,7 +48,10 @@
 
     systemd = {
       initrdBin = with pkgs; [
-        iptables iproute2 tailscale gnutar
+        iptables
+        iproute2
+        tailscale
+        gnutar
       ];
       enable = true;
       emergencyAccess = "$6$Q9squq6JffqBotsn$G2oqvxWg2PS6tJFzplu/ycjmFzNRwF.uX5EPQJI12wQhs75lFYSpGbf/EG6L7CdOtfvHUiBMX.t4y0vXYTlbT.";
@@ -53,7 +61,7 @@
         networks."10-lan" = {
           enable = true;
           matchConfig = {
-            Name = "enp0s25";  # Matches the network interface by name
+            Name = "enp0s25"; # Matches the network interface by name
           };
           networkConfig = {
             DHCP = "yes";
@@ -62,7 +70,8 @@
       };
 
       tpm2.enable = true;
-      /* services.unlock = {
+      /*
+        services.unlock = {
         unitConfig = {
           Type = "simple";
         };
@@ -75,27 +84,28 @@
           zpool import -a;
           echo $(curl -s "http://clevis.local/the-encrypted-keyfile" | clevis decrypt) | zfs load-key -a && killall zfs
         '';
-        };*/
+        };
+      */
 
     };
 
     network = {
       enable = true;
       ssh = {
-         enable = true;
-         # To prevent ssh clients from freaking out because a different host key is used,
-         # a different port for ssh is useful (assuming the same host has also a regular sshd running)
-         port = 2222;
-         # hostKeys paths must be unquoted strings, otherwise you'll run into issues with boot.initrd.secrets
-         # the keys are copied to initrd from the path specified; multiple keys can be set
-         # you can generate any number of host keys using
-         # `ssh-keygen -t ed25519 -N "" -f /path/to/ssh_host_ed25519_key`
-         hostKeys = [ /run/secrets/init_host_key ];
-         # public ssh key used for login
-         authorizedKeyFiles = [
+        enable = true;
+        # To prevent ssh clients from freaking out because a different host key is used,
+        # a different port for ssh is useful (assuming the same host has also a regular sshd running)
+        port = 2222;
+        # hostKeys paths must be unquoted strings, otherwise you'll run into issues with boot.initrd.secrets
+        # the keys are copied to initrd from the path specified; multiple keys can be set
+        # you can generate any number of host keys using
+        # `ssh-keygen -t ed25519 -N "" -f /path/to/ssh_host_ed25519_key`
+        hostKeys = [ /run/secrets/init_host_key ];
+        # public ssh key used for login
+        authorizedKeyFiles = [
           ../secrets/authorized_keys
-         ];
-       };
+        ];
+      };
     };
   };
 
@@ -125,13 +135,16 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     group = "nixos";
-    extraGroups = [ "wheel" "sudo" ];
+    extraGroups = [
+      "wheel"
+      "sudo"
+    ];
     openssh.authorizedKeys.keyFiles = [ ../secrets/authorized_keys ];
   };
   nix.settings.trusted-users = [ "nixos" ];
 
-  users.groups.k8s =  {};
-  users.groups.nixos = {};
+  users.groups.k8s = { };
+  users.groups.nixos = { };
 
   services.openssh = {
 
