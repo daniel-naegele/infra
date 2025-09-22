@@ -1,6 +1,6 @@
 {
   modulesPath,
-  config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -22,8 +22,13 @@
   boot.zfs.requestEncryptionCredentials = true;
 
   boot.loader = {
-    systemd-boot.enable = true;
+    systemd-boot.enable = lib.mkForce false;
     efi.canTouchEfiVariables = true;
+  };
+
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
   };
 
   sops.secrets = {
@@ -34,6 +39,7 @@
       mode = "0600";
     };
   };
+
   boot.initrd = {
     availableKernelModules = [ "igc" ];
     kernelModules = [
@@ -121,7 +127,7 @@
     openssh
     vim
     wget
-    sbctl
+    inputs.unstable.legacyPackages.${pkgs.system}.sbctl
     tailscale
   ];
 
