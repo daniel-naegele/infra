@@ -7,7 +7,7 @@ keys:
   - &bootstrap age1pua3x7g9qxwy4tzvl640smthfzqk08f7zws2ucjd3t40dm9m0pasm4meqx
   - &machine_nuc age1pua3x7g9qxwy4tzvl640smthfzqk08f7zws2ucjd3t40dm9m0pasm4meqx
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini|bin)$
     key_groups:
       - age:
           - *admin_daniel

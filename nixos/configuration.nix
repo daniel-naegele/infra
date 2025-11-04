@@ -14,9 +14,10 @@
 
   boot.kernelParams = [ "ip=dhcp" ];
   boot.kernelModules = [
-    "ceph"
+    "rbd"
     "e1000e"
     "iwlwifi"
+    "nft-expr-counter"
   ];
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.requestEncryptionCredentials = true;
@@ -67,7 +68,16 @@
         networks."10-lan" = {
           enable = true;
           matchConfig = {
-            Name = "enp0s25"; # Matches the network interface by name
+            Name = "eth0"; # Matches the network interface by name
+          };
+          networkConfig = {
+            DHCP = "yes";
+          };
+        };
+        networks."20-wifi" = {
+          enable = true;
+          matchConfig = {
+            Name = "wlan0"; # Matches the network interface by name
           };
           networkConfig = {
             DHCP = "yes";
@@ -164,9 +174,9 @@
   services.zfs.autoScrub.enable = true;
 
   sops.secrets.k3s_token = {
-    format = "yaml";
+    format = "binary";
     # can be also set per secret
-    sopsFile = ../secrets/k3s.yaml;
+    sopsFile = ../secrets/k3s.bin;
   };
 
   system.stateVersion = "24.11";
