@@ -1,12 +1,27 @@
-{ config, lib, pkgs, ... }: let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
   cfg = config.services.tailscale;
-in {
+in
+{
   boot.initrd = {
     systemd.packages = [ cfg.package ];
-    availableKernelModules = ["tun" "nft_chain_nat"];
+    availableKernelModules = [
+      "tun"
+      "nft_chain_nat"
+    ];
 
     systemd.services.tailscaled = {
       wantedBy = [ "initrd.target" ];
+      before = [
+        "zfs-load-key.service"
+        "zfs-load-key@.service"
+        "zfs-import-zroot.service"
+      ];
       serviceConfig.Environment = [
         "PORT=${toString cfg.port}"
         ''"FLAGS=--tun ${lib.escapeShellArg cfg.interfaceName}"''
@@ -25,27 +40,40 @@ in {
 
     systemd.extraBin.ping = "${pkgs.iputils}/bin/ping";
 
-    /*systemd.additionalUpstreamUnits = ["systemd-resolved.service"];
-    systemd.users.systemd-resolve = {};
-    systemd.groups.systemd-resolve = {};
-    systemd.contents."/etc/systemd/resolved.conf".source = config.environment.etc."systemd/resolved.conf".source;
-    systemd.storePaths = ["${config.boot.initrd.systemd.package}/lib/systemd/systemd-resolved"];
-    systemd.services.systemd-resolved = {
-      wantedBy = ["initrd.target"];
-      serviceConfig.ExecStartPre = "-+/bin/ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf";
-      };*/
+    /*
+      systemd.additionalUpstreamUnits = ["systemd-resolved.service"];
+      systemd.users.systemd-resolve = {};
+      systemd.groups.systemd-resolve = {};
+      systemd.contents."/etc/systemd/resolved.conf".source = config.environment.etc."systemd/resolved.conf".source;
+      systemd.storePaths = ["${config.boot.initrd.systemd.package}/lib/systemd/systemd-resolved"];
+      systemd.services.systemd-resolved = {
+        wantedBy = ["initrd.target"];
+        serviceConfig.ExecStartPre = "-+/bin/ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf";
+        };
+    */
 
     # Create a oneshot to autoconnect on rebuild/switch
     systemd.services.tailscale-autoconnect = {
       description = "Automatic connection to Tailscale";
 
-      after = [ "network-pre.target" "tailscaled.service" ];
-      wants = [ "network-pre.target" "tailscaled.service" ];
+      before = [
+        "zfs-load-key.service"
+        "zfs-load-key@.service"
+        "zfs-import-zroot.service"
+      ];
+      after = [
+        "network-pre.target"
+        "tailscaled.service"
+      ];
+      wants = [
+        "network-pre.target"
+        "tailscaled.service"
+      ];
       wantedBy = [ "initrd.target" ];
 
       serviceConfig = {
         Type = "oneshot";
-        Restart= "on-failure";
+        Restart = "on-failure";
       };
 
       # have the job run this shell script
@@ -64,5 +92,25 @@ in {
       '';
     };
 
+    # Ensure all ZFS key-load units wait for tailscaled in initrd
+    systemd.services."zfs-load-key@".unitConfig = {
+      Wants = [ "tailscaled.service" ];
+      After = [ "tailscaled.service" ];
+    };
+    systemd.services."zfs-load-key".unitConfig = {
+      Wants = [ "tailscaled.service" ];
+      After = [ "tailscaled.service" ];
+    };
+
+    systemd.services."zfs-import-zroot".unitConfig = {
+      Wants = [
+        "tailscaled.service"
+        "tailscale-autoconnect.service"
+      ];
+      After = [
+        "tailscaled.service"
+        "tailscale-autoconnect.service"
+      ];
+    };
   };
 }
