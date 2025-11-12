@@ -7,8 +7,10 @@ spec:
   releaseName: headscale
   chart:
     spec:
-      chart: oci://ghcr.io/gabe565/charts/headscale
-      version: 1.2.3
+      chart: headscale
+      sourceRef:
+        kind: HelmRepository
+        name: headscale
   interval: 50m
   install:
     remediation:
