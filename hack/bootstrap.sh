@@ -33,25 +33,32 @@ read -p "" flake_input
 echo "Please define the target host"
 read -p "" target_host
 
+echo "Setup secure boot? (y/n)"
+read -p "" secure_boot
+
 # Set the correct permissions so sshd will accept the key
 chmod 600 "$temp/etc/ssh/ssh_host_ed25519_key"
-# if /var/lib/sbctl already exists
-if [ -d /var/lib/sbctl ]; then
-  sudo mv /var/lib/sbctl /var/lib/sbctl.bak
-fi
 
-sudo sbctl create-keys
-install -d -m755 "$temp/persist/var/lib/sbctl"
-sudo mv /var/lib/sbctl "${temp}/persist/var/lib/sbctl"
-cp -r "${temp}/persist/var" $temp
+if [ "$secure_boot" == "y" ]; then
 
-chmod 600 "$temp/var"
-chmod 600 "$temp/persist/var"
+  # if /var/lib/sbctl already exists
+  if [ -d /var/lib/sbctl ]; then
+    sudo mv /var/lib/sbctl /var/lib/sbctl.bak
+  fi
 
-# if you made a backup of sbctl before
-if [ -d /var/lib/sbctl.bak ]; then
-  sudo mv /var/lib/sbctl.bak /var/lib/sbctl
+  sudo sbctl create-keys
+  install -d -m755 "$temp/persist/var/lib/sbctl"
+  sudo mv /var/lib/sbctl "${temp}/persist/var/lib/sbctl"
+  cp -r "${temp}/persist/var" $temp
+
+  chmod 600 "$temp/var"
+  chmod 600 "$temp/persist/var"
+
+  # if you made a backup of sbctl before
+  if [ -d /var/lib/sbctl.bak ]; then
+    sudo mv /var/lib/sbctl.bak /var/lib/sbctl
+  fi
 fi
 
 # Install NixOS to the host system with our secrets
-nix run github:nix-community/nixos-anywhere -- --extra-files "$temp" --flake flake_input --target-host target_host --debug
+nix run github:nix-community/nixos-anywhere -- --extra-files "$temp" --flake "$flake_input" --target-host "$target_host" --debug

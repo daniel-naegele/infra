@@ -12,13 +12,10 @@
     ./hardware-configuration.nix
     ../configuration.nix
     ../k8s-server.nix
-    ../secure-boot.nix
+    ../bios-boot.nix
   ];
 
-  sops.defaultSopsFile = ../../secrets/nuc.yaml;
+  sops.defaultSopsFile = ../../secrets/de-fsn1-01.yaml;
 
-  networking.hostId = "2054d6cd";
-  networking.wireless.enable = true;
-  networking.wireless.userControlled.enable = true;
-
+  networking.hostId = "f4f9b7d5";
 }

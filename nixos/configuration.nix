@@ -23,13 +23,8 @@
   boot.zfs.requestEncryptionCredentials = true;
 
   boot.loader = {
-    systemd-boot.enable = lib.mkForce false;
+    systemd-boot.enable = false;
     efi.canTouchEfiVariables = true;
-  };
-
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/var/lib/sbctl";
   };
 
   sops.secrets = {
