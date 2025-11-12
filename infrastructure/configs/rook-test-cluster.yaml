@@ -6,7 +6,7 @@ metadata:
   namespace: rook-ceph # namespace:cluster
 spec:
   monitoring:
-    true
+    enabled: true
   dataDirHostPath: /var/lib/rook
   cephVersion:
     image: quay.io/ceph/ceph:v19

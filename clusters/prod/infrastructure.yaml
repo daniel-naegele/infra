@@ -14,6 +14,22 @@ spec:
   path: ./infrastructure/controllers
   prune: true
   wait: true
+  patches:
+    - patch: |
+        - op: replace
+          path: /spec/value/grafana/ingress/hosts/0/host
+          value: grafana.men.sh
+      target:
+        kind: HelmRelease
+        name: prometheus
+    - patch: |
+        - op: replace
+          path: /spec/value/ingress/hosts/0/host
+          value: gitops.men.sh
+      target:
+        kind: HelmRelease
+        name: ww-gitops
+
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
