@@ -3,7 +3,8 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   annotations:
-    metadata.weave.works/description: This is the source location for the Weave GitOps
+    metadata.weave.works/description:
+      This is the source location for the Weave GitOps
       Dashboard's helm chart.
   labels:
     app.kubernetes.io/component: ui
@@ -21,7 +22,8 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   annotations:
-    metadata.weave.works/description: This is the Weave GitOps Dashboard.  It provides
+    metadata.weave.works/description:
+      This is the Weave GitOps Dashboard.  It provides
       a simple way to get insights into your GitOps workloads.
   name: ww-gitops
   namespace: flux-system
@@ -40,7 +42,7 @@ spec:
       username: admin
     ingress:
       enabled: true
-      className: nginx
+      className: traefik
       hosts:
         - host: weave.staging
           paths:

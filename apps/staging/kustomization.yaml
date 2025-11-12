@@ -4,6 +4,8 @@ resources:
   - ../base/podinfo
   - ../base/nextcloud
   - ../base/jellyfin
+  - ../base/headscale
+
 patches:
   - path: podinfo-values.yaml
     target:

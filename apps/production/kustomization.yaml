@@ -4,9 +4,17 @@ resources:
   - ../base/podinfo
   - ../base/nextcloud
   - ../base/jellyfin
+  - ../base/headscale
 patches:
   - path: podinfo-values.yaml
     target:
       kind: HelmRelease
       name: podinfo
-
+  - path: nextcloud-values.yaml
+    target:
+      kind: HelmRelease
+      name: nextcloud
+  - path: podinfo-values.yaml
+    target:
+      kind: HelmRelease
+      name: podinfo

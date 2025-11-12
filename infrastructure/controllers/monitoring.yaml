@@ -33,6 +33,6 @@ spec:
     grafana:
       ingress:
         enabled: true
-        ingressClassName: nginx
+        ingressclassName: traefik
         hosts:
           - grafana.staging
