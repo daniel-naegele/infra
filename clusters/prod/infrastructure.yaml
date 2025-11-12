@@ -17,14 +17,14 @@ spec:
   patches:
     - patch: |
         - op: replace
-          path: /spec/value/grafana/ingress/hosts/0/host
+          path: /spec/values/grafana/ingress/hosts/0/host
           value: grafana.men.sh
       target:
         kind: HelmRelease
         name: prometheus
     - patch: |
         - op: replace
-          path: /spec/value/ingress/hosts/0/host
+          path: /spec/values/ingress/hosts/0/host
           value: gitops.men.sh
       target:
         kind: HelmRelease
