@@ -14,7 +14,7 @@ patches:
     target:
       kind: HelmRelease
       name: nextcloud
-  - path: podinfo-values.yaml
+  - path: jellyfin-values.yaml
     target:
       kind: HelmRelease
-      name: podinfo
+      name: jellyfin
