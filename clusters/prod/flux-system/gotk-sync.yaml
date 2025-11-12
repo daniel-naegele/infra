@@ -11,7 +11,7 @@ spec:
     branch: main
   secretRef:
     name: flux-system
-  url: ssh://git@github.com/daniel-naegele/infra.git
+  url: ssh://git@github.com/daniel-naegele/infra
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
