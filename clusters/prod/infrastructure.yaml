@@ -17,7 +17,7 @@ spec:
   patches:
     - patch: |
         - op: replace
-          path: /spec/values/grafana/ingress/hosts/0/host
+          path: /spec/values/grafana/ingress/hosts/0
           value: grafana.men.sh
       target:
         kind: HelmRelease
