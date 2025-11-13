@@ -17,5 +17,19 @@
 
   sops.defaultSopsFile = ../../secrets/de-fsn1-01.yaml;
 
-  networking.hostId = "f4f9b7d5";
+  networking = {
+    hostId = "f4f9b7d5";
+    defaultGateway6 = {
+      address = "fe80::1";
+      interface = "enp1s0";
+    };
+    interfaces.enp1s0 = {
+      ipv6.addresses = [
+        {
+          address = "2a01:4f8:c014:ea20::1";
+          prefixLength = 64;
+        }
+      ];
+    };
+  };
 }
