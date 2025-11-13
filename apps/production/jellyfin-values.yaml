@@ -8,3 +8,6 @@ spec:
     ingress:
       hosts:
         - host: media.men.sh
+          paths:
+            - path: /
+              pathType: ImplementationSpecific

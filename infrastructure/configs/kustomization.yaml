@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - cluster-issuers.yaml
   - rook-test-cluster.yaml
+  - traefik.yaml
