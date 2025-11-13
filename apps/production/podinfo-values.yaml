@@ -8,3 +8,6 @@ spec:
     ingress:
       hosts:
         - host: podinfo.men.sh
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
