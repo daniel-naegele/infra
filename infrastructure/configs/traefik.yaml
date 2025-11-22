@@ -8,6 +8,8 @@ spec:
     ingressClass:
       enabled: true
       isDefaultClass: true
-    ports:
-        web:
-          redirectTo: websecure
+    middlewares:
+      redirect-https:
+        redirectScheme:
+          scheme: https
+          permanent: true
