@@ -6,8 +6,10 @@ metadata:
 spec:
   values:
     ingress:
+      tls:
+        - secretName: podinfo-tls
       hosts:
         - host: podinfo.men.sh
           paths:
             - path: /
-              pathType: ImplementationSpecific
+              pathType: Prefix

@@ -10,4 +10,4 @@ spec:
         - host: media.men.sh
           paths:
             - path: /
-              pathType: ImplementationSpecific
+              pathType: Prefix

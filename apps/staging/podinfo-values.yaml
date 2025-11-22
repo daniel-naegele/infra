@@ -15,4 +15,4 @@ spec:
         - host: podinfo.staging
           paths:
             - path: /
-              pathType: ImplementationSpecific
+              pathType: Prefix
