@@ -1,16 +1,25 @@
+#---
+#apiVersion: helm.cattle.io/v1
+#kind: HelmChartConfig
+#metadata:
+#  name: traefik
+#  namespace: kube-system
+#spec:
+#  valuesContent: |-
+#    middlewares:
+#      redirect-https:
+#        redirectScheme:
+#          scheme: https
+#          permanent: true
 ---
-apiVersion: helm.cattle.io/v1
-kind: HelmChartConfig
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
 metadata:
-  name: traefik
-  namespace: kube-system
+  name: redirect-https
 spec:
-  valuesContent: |-
-    middlewares:
-      redirect-https:
-        redirectScheme:
-          scheme: https
-          permanent: true
+  redirectScheme:
+    scheme: https
+    permanent: true
 ---
 apiVersion: networking.k8s.io/v1
 kind: IngressClass
