@@ -6,6 +6,8 @@ metadata:
 spec:
   values:
     ingress:
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
       tls:
         - hosts:
             - podinfo.men.sh
