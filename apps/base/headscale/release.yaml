@@ -24,11 +24,11 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: traefik
         hosts:
           - host: ts.men.sh
             paths:
               - path: /
+                pathType: Prefix
 
     serviceMonitor:
       main:
