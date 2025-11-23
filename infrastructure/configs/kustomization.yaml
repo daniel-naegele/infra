@@ -4,4 +4,3 @@ resources:
   - cluster-issuers.yaml
   - rook-test-cluster.yaml
   - traefik.yaml
-  - default-issuer.yaml

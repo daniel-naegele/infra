@@ -1,9 +1,0 @@
-apiVersion: policy.cert-manager.io/v1alpha1
-kind: CertificateRequestPolicy
-metadata:
-  name: default-letsencrypt
-spec:
-  selector:
-    issuerRef:
-      name: letsencrypt
-      kind: ClusterIssuer

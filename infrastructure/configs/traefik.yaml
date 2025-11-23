@@ -1,3 +1,4 @@
+---
 apiVersion: helm.cattle.io/v1
 kind: HelmChartConfig
 metadata:
@@ -5,11 +6,17 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
-    ingressClass:
-      enabled: true
-      isDefaultClass: true
     middlewares:
       redirect-https:
         redirectScheme:
           scheme: https
           permanent: true
+---
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: traefik
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  controller: traefik.io/ingress-controller
