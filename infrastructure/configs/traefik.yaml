@@ -18,5 +18,6 @@ metadata:
   name: traefik
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+    ingressclass.kubernetes.io/is-default-class: true
 spec:
   controller: traefik.io/ingress-controller
