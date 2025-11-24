@@ -34,5 +34,9 @@ spec:
       ingress:
         enabled: true
         ingressclassName: traefik
+        tls:
+          - secretName: grafana-tls
+            hosts:
+              - grafana.dev.men.sh
         hosts:
-          - grafana.staging
+          - grafana.dev.men.sh

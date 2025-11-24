@@ -24,12 +24,25 @@ spec:
         name: prometheus
     - patch: |
         - op: replace
+          path: /spec/values/grafana/ingress/tls/hosts/0
+          value: grafana.men.sh
+      target:
+        kind: HelmRelease
+        name: prometheus
+    - patch: |
+        - op: replace
           path: /spec/values/ingress/hosts/0/host
           value: gitops.men.sh
       target:
         kind: HelmRelease
         name: ww-gitops
-
+    - patch: |
+        - op: replace
+          path: /spec/values/ingress/tls/hosts/0
+          value: gitops.men.sh
+      target:
+        kind: HelmRelease
+        name: ww-gitops
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization

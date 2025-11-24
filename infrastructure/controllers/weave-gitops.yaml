@@ -48,6 +48,8 @@ spec:
         traefik.ingress.kubernetes.io/router.middlewares: default-redirect-https@kubernetescrd
       tls:
         - secretName: weave-tls
+          hosts:
+            - gitops.dev.men.sh
       hosts:
         - host: gitops.dev.men.sh
           paths:
