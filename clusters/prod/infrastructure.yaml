@@ -24,7 +24,7 @@ spec:
         name: prometheus
     - patch: |
         - op: replace
-          path: /spec/values/grafana/ingress/tls/hosts/0
+          path: /spec/values/grafana/ingress/tls/0/hosts/0
           value: grafana.men.sh
       target:
         kind: HelmRelease
@@ -38,7 +38,7 @@ spec:
         name: ww-gitops
     - patch: |
         - op: replace
-          path: /spec/values/ingress/tls/hosts/0
+          path: /spec/values/ingress/tls/0/hosts/0
           value: gitops.men.sh
       target:
         kind: HelmRelease
