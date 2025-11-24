@@ -43,8 +43,13 @@ spec:
     ingress:
       enabled: true
       className: traefik
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        traefik.ingress.kubernetes.io/router.middlewares: default-redirect-https@kubernetescrd
+      tls:
+        - secretName: weave-tls
       hosts:
-        - host: weave.staging
+        - host: gitops.dev.men.sh
           paths:
             - path: /
               pathType: Prefix
