@@ -24,6 +24,7 @@ spec:
     ingress:
       main:
         enabled: true
+        className: traefik
         hosts:
           - host: ts.men.sh
             paths:
