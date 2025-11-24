@@ -32,6 +32,9 @@ spec:
   values:
     grafana:
       ingress:
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          traefik.ingress.kubernetes.io/router.middlewares: default-redirect-https@kubernetescrd
         enabled: true
         ingressclassName: traefik
         tls:
