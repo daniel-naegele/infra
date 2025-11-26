@@ -24,12 +24,11 @@ spec:
     sidecars:
       ui:
         image: ghcr.io/gurucomputing/headscale-ui:latest
-
         env:
           - name: PORT
             value: "8090"
         ports:
-          - name: http
+          - name: http-ui
             containerPort: 8090
     service:
       main:
