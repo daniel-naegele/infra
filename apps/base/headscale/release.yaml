@@ -24,14 +24,18 @@ spec:
     sidecars:
       ui:
         image: ghcr.io/gurucomputing/headscale-ui:latest
+
+        env:
+          - name: PORT
+            value: "8090"
         ports:
           - name: http
-            containerPort: 80
+            containerPort: 8090
     service:
       main:
         ports:
           ui:
-            port: 80
+            port: 8090
 
     ingress:
       ui:
@@ -41,7 +45,7 @@ spec:
             paths:
               - path: /web
                 service:
-                  port: 80
+                  port: 8090
         tls:
           - secretName: headscale-tls
             hosts:
