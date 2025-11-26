@@ -5,12 +5,21 @@
 keys:
   # Personal key for me
   - &admin_daniel age1yvcq2p43h023m8ds5qjyc96p48kd4p4f8f7hux8dsjcv7tfehvaqjut87h
+  # Decryption key for the Kubernetes cluster
+  - &machine_k8s age13vnmsvg4s2uxzz4rm3apnt4dpczc5njans0el4d3glx92atynf8sla5l7x
   - &bootstrap age1pua3x7g9qxwy4tzvl640smthfzqk08f7zws2ucjd3t40dm9m0pasm4meqx
   # Private key from NUC machine (not the initrd host key)
   - &machine_nuc age1pua3x7g9qxwy4tzvl640smthfzqk08f7zws2ucjd3t40dm9m0pasm4meqx
   - &machine_de-fsn1-01 age1fa75e99e6pe9gp0j8n2j4yn2jlcj7rvfmdkvc3h6wtyeh5c685hs87wv5z
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yaml|json|env|ini|bin)$
+  # This is used for Kubernetes secrets
+  - path_regex: (infrastructure|apps|clusters)\/.+\.(yaml|json|env|ini|bin)$
+    encrypted_regex: "^(data|stringData)$"
+    key_groups:
+      - age:
+          - *admin_daniel
+          - *machine_k8s
+  - path_regex: secrets\/[^/]+\.(yaml|json|env|ini|bin)$
     key_groups:
       - age:
           - *admin_daniel
