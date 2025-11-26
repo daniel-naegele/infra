@@ -30,6 +30,15 @@ spec:
     remediation:
       retries: 3
   values:
+    csi:
+      enableCSIEncryption: false
+      csiCephFSPluginVolume:
+        - name: host-nix
+          hostPath:
+          path: /nix
+      csiRBDPluginVolume:
+        - name: host-nix
+          hostPath:
+          path: /nix
     monitoring:
       enabled: true
-  
