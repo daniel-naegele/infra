@@ -25,7 +25,7 @@ spec:
       ui:
         image: ghcr.io/gurucomputing/headscale-ui:latest
         env:
-          - name: PORT
+          - name: HTTP_PORT
             value: "8090"
         ports:
           - name: http-ui
