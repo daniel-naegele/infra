@@ -15,4 +15,3 @@ spec:
       - http01:
           ingress:
             ingressClassName: traefik
-            entryPoint: acme
