@@ -52,6 +52,10 @@ spec:
       main:
         enabled: true
         className: traefik
+        tls:
+          - secretName: headscale-tls
+            hosts:
+              - ts.men.sh
         hosts:
           - host: ts.men.sh
             paths:
