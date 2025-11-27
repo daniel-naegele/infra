@@ -50,6 +50,7 @@ spec:
         storageClass:
           enabled: true
           isDefault: false
+          name: filesystem
         spec:
           metadataPool:
             replicated:
