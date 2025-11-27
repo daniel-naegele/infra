@@ -50,7 +50,6 @@ spec:
         storageClass:
           enabled: true
           isDefault: false
-          name: ceph-filesystem
         spec:
           metadataPool:
             replicated:
