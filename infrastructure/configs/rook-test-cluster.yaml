@@ -5,7 +5,7 @@ metadata:
   name: test-cluster
   namespace: rook-ceph
 spec:
-  releaseName: rook-ceph-cluster
+  releaseName: test-cluster
   chart:
     spec:
       chart: rook-ceph-cluster
