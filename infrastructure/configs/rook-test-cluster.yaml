@@ -1,48 +1,45 @@
 ---
-apiVersion: ceph.rook.io/v1
-kind: CephCluster
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
 metadata:
-  name: test-cluster
-  namespace: rook-ceph # namespace:cluster
+  name: rook-ceph-cluster
+  namespace: rook-ceph
 spec:
-  monitoring:
-    enabled: true
-  dataDirHostPath: /var/lib/rook
-  cephVersion:
-    image: quay.io/ceph/ceph:v19
-    allowUnsupported: true
-  mon:
-    count: 1
-    allowMultiplePerNode: true
-  mgr:
-    count: 1
-    allowMultiplePerNode: true
-  dashboard:
-    enabled: true
-  crashCollector:
-    disable: true
-  storage:
-    useAllNodes: true
-    useAllDevices: true
-    #deviceFilter:
-  healthCheck:
-    daemonHealth:
+  releaseName: rook-ceph-cluster
+  chart:
+    spec:
+      chart: rook-ceph-cluster
+      sourceRef:
+        kind: HelmRepository
+        name: rook-ceph
+  interval: 50m
+  install:
+    remediation:
+      retries: 3
+  values:
+    clusterName: default
+    toolbox:
+      enabled: true
+    monitoring:
+      enabled: true
+    cephClusterSpec:
       mon:
-        interval: 45s
-        timeout: 600s
-  priorityClassNames:
-    all: system-node-critical
-    mgr: system-cluster-critical
-  disruptionManagement:
-    managePodBudgets: true
----
-apiVersion: ceph.rook.io/v1
-kind: CephBlockPool
-metadata:
-  name: builtin-mgr
-  namespace: rook-ceph # namespace:cluster
-spec:
-  name: .mgr
-  replicated:
-    size: 1
-    requireSafeReplicaSize: false
+        count: 1
+      mgr:
+        count: 1
+    ingress:
+      dashboard:
+        enabled: true
+        className: traefik
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          traefik.ingress.kubernetes.io/router.middlewares: default-redirect-https@kubernetescrd
+        tls:
+          - secretName: weave-tls
+            hosts:
+              - ceph.men.sh
+        hosts:
+          - host: ceph.men.sh
+            paths:
+              - path: /
+                pathType: Prefix
