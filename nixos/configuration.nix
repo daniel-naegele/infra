@@ -15,6 +15,7 @@
   boot.kernelParams = [ "ip=dhcp" ];
   boot.kernelModules = [
     "rbd"
+    "nbd"
     "e1000e"
     "iwlwifi"
     "nft-expr-counter"
