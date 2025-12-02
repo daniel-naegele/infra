@@ -22,6 +22,27 @@ spec:
       enabled: true
     monitoring:
       enabled: true
+
+    resources:
+      mgr:
+        limits:
+          memory: "4Gi"
+        requests:
+          cpu: "100m"
+          memory: "500Mi"
+      mds:
+        limits:
+          memory: "4Gi"
+        requests:
+          cpu: "100m"
+          memory: "500Mi"
+      mon:
+        limits:
+          memory: "4Gi"
+        requests:
+          cpu: "100m"
+          memory: "500Mi"
+
     cephClusterSpec:
       mon:
         count: 1
@@ -64,10 +85,4 @@ spec:
           metadataServer:
             activeCount: 1
             activeStandby: true
-            resources:
-              limits:
-                memory: "4Gi"
-              requests:
-                cpu: "100m"
-                memory: "1Gi"
             priorityClassName: system-cluster-critical
