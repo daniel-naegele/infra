@@ -35,10 +35,18 @@ spec:
       csiCephFSPluginVolume:
         - name: host-nix
           hostPath:
-          path: /nix
+            path: /nix
       csiRBDPluginVolume:
         - name: host-nix
           hostPath:
-          path: /nix
+            path: /nix
+      csiRBDPluginVolumeMount:
+        - name: host-nix
+          mountPath: /nix
+          readOnly: true
+      csiCephFSPluginVolumeMount:
+        - name: host-nix
+          mountPath: /nix
+          readOnly: true
     monitoring:
       enabled: true
