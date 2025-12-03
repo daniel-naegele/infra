@@ -22,6 +22,8 @@ spec:
       enabled: true
     monitoring:
       enabled: true
+    dashboard:
+      enabled: true
 
     resources:
       mgr:
