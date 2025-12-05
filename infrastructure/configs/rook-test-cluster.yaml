@@ -31,25 +31,25 @@ spec:
           limits:
             memory: "4Gi"
           requests:
-            cpu: "100m"
+            cpu: "10m"
             memory: "128Mi"
         mds:
           limits:
             memory: "4Gi"
           requests:
-            cpu: "100m"
+            cpu: "10m"
             memory: "128Mi"
         mon:
           limits:
             memory: "4Gi"
           requests:
-            cpu: "100m"
+            cpu: "10m"
             memory: "128Mi"
         osd:
           limits:
             memory: "4Gi"
           requests:
-            cpu: "100m"
+            cpu: "10m"
             memory: "128Mi"
       mon:
         count: 1
@@ -99,5 +99,5 @@ spec:
               limits:
                 memory: "4Gi"
               requests:
-                cpu: "100m"
+                cpu: "10m"
                 memory: "128Mi"

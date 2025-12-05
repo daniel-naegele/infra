@@ -53,35 +53,35 @@ spec:
           resource:
             requests:
               memory: 128Mi
-              cpu: 100m
+              cpu: 10m
             limits:
               memory: 256Mi
         - name : csi-resizer
           resource:
             requests:
               memory: 128Mi
-              cpu: 100m
+              cpu: 10m
             limits:
               memory: 256Mi
         - name : csi-attacher
           resource:
             requests:
               memory: 128Mi
-              cpu: 100m
+              cpu: 10m
             limits:
               memory: 256Mi
         - name : csi-snapshotter
           resource:
             requests:
               memory: 128Mi
-              cpu: 100m
+              cpu: 10m
             limits:
               memory: 256Mi
         - name : csi-cephfsplugin
           resource:
             requests:
               memory: 128Mi
-              cpu: 100m
+              cpu: 10m
             limits:
               memory: 1Gi
         - name : liveness-prometheus
@@ -106,7 +106,7 @@ spec:
           resource:
             requests:
               memory: 128Mi
-              cpu: 100m
+              cpu: 10m
             limits:
               memory: 1Gi
         - name : liveness-prometheus
