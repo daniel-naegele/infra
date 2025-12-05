@@ -89,6 +89,9 @@ spec:
           enabled: true
           isDefault: true
           name: filesystem
+          annotations:
+            - csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+            - csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
         spec:
           metadataPool:
             replicated:
