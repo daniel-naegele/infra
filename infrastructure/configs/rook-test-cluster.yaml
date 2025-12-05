@@ -20,38 +20,37 @@ spec:
     clusterName: test-cluster
     toolbox:
       enabled: true
-    monitoring:
-      enabled: true
-    dashboard:
-      enabled: true
-
-    resources:
-      mgr:
-        limits:
-          memory: "4Gi"
-        requests:
-          cpu: "100m"
-          memory: "500Mi"
-      mds:
-        limits:
-          memory: "4Gi"
-        requests:
-          cpu: "100m"
-          memory: "500Mi"
-      mon:
-        limits:
-          memory: "4Gi"
-        requests:
-          cpu: "100m"
-          memory: "500Mi"
-      osd:
-        limits:
-          memory: "4Gi"
-        requests:
-          cpu: "100m"
-          memory: "500Mi"
 
     cephClusterSpec:
+      monitoring:
+        enabled: true
+      dashboard:
+        enabled: true
+      resources:
+        mgr:
+          limits:
+            memory: "4Gi"
+          requests:
+            cpu: "100m"
+            memory: "500Mi"
+        mds:
+          limits:
+            memory: "4Gi"
+          requests:
+            cpu: "100m"
+            memory: "500Mi"
+        mon:
+          limits:
+            memory: "4Gi"
+          requests:
+            cpu: "100m"
+            memory: "500Mi"
+        osd:
+          limits:
+            memory: "4Gi"
+          requests:
+            cpu: "100m"
+            memory: "500Mi"
       mon:
         count: 1
       mgr:
@@ -78,7 +77,7 @@ spec:
 
         storageClass:
           enabled: true
-          isDefault: false
+          isDefault: true
           name: filesystem
         spec:
           metadataPool:
