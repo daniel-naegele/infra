@@ -28,8 +28,9 @@ spec:
         enabled: true
       storage:
         useAllNodes: true
-        devices:
-          - name: /dev/pool/osd
+        useAllDevices: true
+        deviceFilter: sda4
+
       resources:
         mgr:
           limits:
