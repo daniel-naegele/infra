@@ -26,6 +26,10 @@ spec:
     cephClusterSpec:
       dashboard:
         enabled: true
+      storage:
+        useAllNodes: true
+        devices:
+          - name: /dev/pool/osd
       resources:
         mgr:
           limits:
