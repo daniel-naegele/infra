@@ -20,10 +20,10 @@ spec:
     clusterName: test-cluster
     toolbox:
       enabled: true
+    monitoring:
+      enabled: true
 
     cephClusterSpec:
-      monitoring:
-        enabled: true
       dashboard:
         enabled: true
       resources:
