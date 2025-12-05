@@ -72,55 +72,7 @@ spec:
               - path: /
                 pathType: Prefix
     cephBlockPools: []
-    cephObjectStores:
-      - name: ceph-objectstore
-        # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Object-Storage/ceph-object-store-crd.md#object-store-settings for available configuration
-        spec:
-          metadataPool:
-            failureDomain: host
-            replicated:
-              size: 3
-          dataPool:
-            failureDomain: host
-            erasureCoded:
-              dataChunks: 2
-              codingChunks: 1
-            parameters:
-              bulk: "true"
-          preservePoolsOnDelete: true
-          gateway:
-            port: 80
-            resources:
-              limits:
-                memory: "2Gi"
-              requests:
-                cpu: "100m"
-                memory: "100Mi"
-            # securePort: 443
-            # sslCertificateRef:
-            instances: 1
-            priorityClassName: system-cluster-critical
-            # opsLogSidecar:
-            #   resources:
-            #     limits:
-            #       memory: "100Mi"
-            #     requests:
-            #       cpu: "100m"
-            #       memory: "40Mi"
-        storageClass:
-          enabled: true
-          name: ceph-bucket
-          reclaimPolicy: Delete
-          volumeBindingMode: "Immediate"
-          annotations: {}
-          labels: {}
-          # see https://github.com/rook/rook/blob/master/Documentation/Storage-Configuration/Object-Storage-RGW/ceph-object-bucket-claim.md#storageclass for available configuration
-          parameters:
-            # note: objectStoreNamespace and objectStoreName are configured by the chart
-            region: eu-west-1
-        ingress:
-          # Enable an ingress for the ceph-objectstore
-          enabled: true
+    cephObjectStores: []
     cephFileSystems:
       - name: ceph-filesystem
         # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#filesystem-settings for available configuration
