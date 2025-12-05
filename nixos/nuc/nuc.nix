@@ -7,11 +7,10 @@
 }:
 {
   imports = [
-    # Include the results of the hardware scan.
     ./disk-config.nix
     ./hardware-configuration.nix
     ../configuration.nix
-    ../k8s-server.nix
+    ../k8s/server.nix
     ../secure-boot.nix
   ];
 

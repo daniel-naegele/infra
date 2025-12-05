@@ -11,7 +11,7 @@
     ./disk-config.nix
     ./hardware-configuration.nix
     ../configuration.nix
-    ../k8s-server.nix
+    ../k8s/bootstrap.nix
     ../bios-boot.nix
   ];
 
