@@ -15,54 +15,58 @@
               # no content
             };
             ESP = {
-              size = "2G";
+              size = "1G";
               type = "EF00";
               content = {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "nofail" ];
+                mountOptions = [
+                  "nofail"
+                  "umask=0077"
+                ];
               };
             };
-            zfs = {
+            luks = {
               size = "100%";
               content = {
-                type = "zfs";
-                pool = "zroot";
+                type = "luks";
+                name = "crypted";
+                extraOpenArgs = [ ];
+                settings = {
+                  # if you want to use the key for interactive login be sure there is no trailing newline
+                  # for example use `echo -n "password" > /tmp/secret.key`
+                  # keyFile = "/tmp/secret.key";
+                  allowDiscards = true;
+                };
+                # additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
+                content = {
+                  type = "lvm_pv";
+                  vg = "pool";
+                };
               };
             };
           };
         };
       };
     };
-    zpool = {
-      zroot = {
-        type = "zpool";
-        rootFsOptions = {
-          mountpoint = "none";
-          compression = "zstd";
-          acltype = "posixacl";
-          xattr = "sa";
-
-          "com.sun:auto-snapshot" = "true";
-        };
-        options.ashift = "12";
-
-        datasets = {
-          "root" = {
-            type = "zfs_fs";
-            options = {
-              encryption = "aes-256-gcm";
-              keyformat = "passphrase";
-              #keylocation = "file:///tmp/secret.key";
-              keylocation = "prompt";
+    lvm_vg = {
+      pool = {
+        type = "lvm_vg";
+        lvs = {
+          os = {
+            size = "100%";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/";
+              mountOptions = [
+                "defaults"
+              ];
             };
-            mountpoint = "/";
           };
-          "root/nix" = {
-            type = "zfs_fs";
-            options.mountpoint = "/nix";
-            mountpoint = "/nix";
+          osd = {
+            size = "10G";
           };
         };
       };
