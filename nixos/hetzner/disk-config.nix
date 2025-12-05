@@ -29,45 +29,31 @@
               };
             };
             luks = {
-              size = "100%";
+              size = "40G";
               content = {
                 type = "luks";
                 name = "crypted";
                 extraOpenArgs = [ ];
+                passwordFile = "/tmp/disk-1.key";
                 settings = {
                   # if you want to use the key for interactive login be sure there is no trailing newline
                   # for example use `echo -n "password" > /tmp/secret.key`
-                  # keyFile = "/tmp/secret.key";
                   allowDiscards = true;
                 };
                 # additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
                 content = {
-                  type = "lvm_pv";
-                  vg = "pool";
+                  type = "filesystem";
+                  format = "xfs";
+                  mountpoint = "/";
+                  mountOptions = [
+                    "defaults"
+                  ];
                 };
               };
             };
-          };
-        };
-      };
-    };
-    lvm_vg = {
-      pool = {
-        type = "lvm_vg";
-        lvs = {
-          os = {
-            size = "40G";
-            content = {
-              type = "filesystem";
-              format = "ext4";
-              mountpoint = "/";
-              mountOptions = [
-                "defaults"
-              ];
+            osd = {
+              size = "100%";
             };
-          };
-          osd = {
-            size = "100%";
           };
         };
       };

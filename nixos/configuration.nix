@@ -1,7 +1,6 @@
 {
   modulesPath,
   inputs,
-  lib,
   pkgs,
   ...
 }:
@@ -20,6 +19,9 @@
     "iwlwifi"
     "nft-expr-counter"
   ];
+  boot.kernel.sysctl = {
+    "fs.inotify.max_user_watches" = 524288;
+  };
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.requestEncryptionCredentials = true;
 
