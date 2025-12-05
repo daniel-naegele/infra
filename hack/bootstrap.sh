@@ -27,10 +27,10 @@ if [ "$confirmation" != "yes" ]; then
   exit 1
 fi
 
-echo "Please define the flake input"
-read -p "" flake_input
+echo "Please define machine hostname (e.g. de-fsn1-01)"
+read -p "" machine_hostname
 
-echo "Please define the target host"
+echo "Please define the target host (e.g. root@my-ip)"
 read -p "" target_host
 
 echo "Setup secure boot? (y/n)"
@@ -60,5 +60,15 @@ if [ "$secure_boot" == "y" ]; then
   fi
 fi
 
+# provide FDE key
+sops -d "secrets/$machine_hostname.yaml" | yq '.fde_pass' > /tmp/disk-1.key
+
 # Install NixOS to the host system with our secrets
-nix run github:nix-community/nixos-anywhere -- --extra-files "$temp" --flake "$flake_input" --target-host "$target_host" --debug
+nix run github:nix-community/nixos-anywhere -- \
+  --disk-encryption-keys /tmp/disk-1.key /tmp/disk-1.key \
+  --extra-files "$temp" \
+  --flake ".#$machine_hostname" \
+  --target-host "$target_host" \
+  --debug
+
+rm /tmp/disk-1.key

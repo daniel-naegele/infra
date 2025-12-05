@@ -1,5 +1,6 @@
 { lib, ... }:
 {
+  # Assumes an 80GB disk
   disko.devices = {
     disk = {
       root = {
@@ -55,7 +56,7 @@
         type = "lvm_vg";
         lvs = {
           os = {
-            size = "100%";
+            size = "40G";
             content = {
               type = "filesystem";
               format = "ext4";
@@ -66,7 +67,7 @@
             };
           };
           osd = {
-            size = "10G";
+            size = "100%";
           };
         };
       };

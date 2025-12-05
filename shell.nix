@@ -10,6 +10,10 @@ mkShell {
     sops
     age
     headscale
+    yq
+    helm
+    kube-capacity
+
   ];
 
   shellHook = ''
