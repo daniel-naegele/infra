@@ -26,6 +26,12 @@ spec:
       interval: 12h
   values:
     grafana:
+      datasources:
+        - name: Prometheus
+          type: prometheus
+          url: http://prometheus-kube-prometheus-prometheus
+          access: proxy
+          isDefault: true
       admin:
         existingSecret: grafana-admin
       ingress:
