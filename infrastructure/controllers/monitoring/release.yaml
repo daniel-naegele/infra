@@ -32,7 +32,7 @@ spec:
           datasources:
             - name: Prometheus
               type: prometheus
-              url: http://prometheus-kube-prometheus-prometheus
+              url: http://prometheus-kube-prometheus-prometheus:9090
               access: proxy
               isDefault: true
       admin:
