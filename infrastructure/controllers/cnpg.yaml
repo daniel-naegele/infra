@@ -30,3 +30,7 @@ spec:
         namespace: cnpg
       interval: 12h
   values:
+    monitoring:
+      podMonitorEnabled: true
+      grafanaDashboard:
+        create: false
