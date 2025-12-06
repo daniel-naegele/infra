@@ -75,6 +75,8 @@ spec:
         );
     redis:
       enabled: true
+      replica:
+        replicaCount: 3
     cronjob:
       enabled: true
     internalDatabase:
