@@ -88,7 +88,7 @@ spec:
         storageClass:
           enabled: true
           isDefault: true
-          name: filesystem
+          name: ceph-filesystem
           reclaimPolicy: Delete
           allowVolumeExpansion: true
           volumeBindingMode: "Immediate"
