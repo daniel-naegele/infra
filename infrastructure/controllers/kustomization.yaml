@@ -4,5 +4,5 @@ resources:
   - cert-manager.yaml
   - cnpg.yaml
   - weave-gitops.yaml
-  - monitoring.yaml
   - rook.yaml
+  - ./monitoring
