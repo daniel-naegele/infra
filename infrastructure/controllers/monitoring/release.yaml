@@ -27,11 +27,14 @@ spec:
   values:
     grafana:
       datasources:
-        - name: Prometheus
-          type: prometheus
-          url: http://prometheus-kube-prometheus-prometheus
-          access: proxy
-          isDefault: true
+        datasources.yaml:
+          apiVersion: 1
+          datasources:
+            - name: Prometheus
+              type: prometheus
+              url: http://prometheus-kube-prometheus-prometheus
+              access: proxy
+              isDefault: true
       admin:
         existingSecret: grafana-admin
       ingress:

@@ -15,6 +15,7 @@
   boot.kernelModules = [
     "rbd"
     "nbd"
+    "ceph"
     "e1000e"
     "iwlwifi"
     "nft-expr-counter"
