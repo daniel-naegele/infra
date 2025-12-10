@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 {
   # Assumes an 80GB disk
   disko.devices = {
