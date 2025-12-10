@@ -6,3 +6,4 @@ resources:
   - weave-gitops.yaml
   - rook.yaml
   - ./monitoring
+  - velero.yaml

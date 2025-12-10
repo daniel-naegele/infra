@@ -34,6 +34,19 @@ spec:
         - name: r2
           provider: aws
           bucket: velero-backup
+          prefix: backup
+          default: true
+          credential:
+            name: cloudflare-r2
+            key: file
+          config:
+            s3Url: https://b12e2beeb323c2c78eb536e955adbee1.r2.cloudflarestorage.com
+      volumeSnapshotLocation:
+        - name: r2
+          provider: aws
+          bucket: velero-backup
+          prefix: snapshot
+          default: true
           credential:
             name: cloudflare-r2
             key: file
