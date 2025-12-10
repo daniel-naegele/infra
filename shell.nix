@@ -13,7 +13,7 @@ mkShell {
     yq
     helm
     kube-capacity
-
+    velero
   ];
 
   shellHook = ''
