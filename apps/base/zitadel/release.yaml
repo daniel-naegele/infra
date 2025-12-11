@@ -22,10 +22,8 @@ spec:
       configmapConfig:
         ExternalDomain: welcher.men.sh
         ExternalSecure: true
-
         TLS:
           Enabled: false
-
         Database:
           Postgres:
             Host: zitadel-pg-rw.zitadel.svc.cluster.local
@@ -34,11 +32,14 @@ spec:
             User:
               Username: zitadel
               SSL:
-                Mode: disable
+                Mode: verify-full
             Admin:
               Username: postgres
               SSL:
-                Mode: disable
+                Mode: verify-full
+      dbSslCaCrtSecret: zitadel-pg-ca
+      dbSslAdminCrtSecret: zitadel-pg-server
+      dbSslUserCrtSecret: zitadel-pg-server
 
     ingress:
       enabled: true
