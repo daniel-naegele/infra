@@ -33,9 +33,12 @@ spec:
               Username: zitadel
               SSL:
                 Mode: verify-full
+            Admin:
+              Username: postgres
+              SSL:
+                Mode: verify-full
       dbSslCaCrtSecret: zitadel-pg-ca
       dbSslAdminCrtSecret: zitadel-pg-server
-      dbSslUserCrtSecret: zitadel-pg-server
 
     ingress:
       enabled: true

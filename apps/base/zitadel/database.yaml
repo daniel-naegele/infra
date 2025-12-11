@@ -15,6 +15,7 @@ spec:
     initdb:
       database: zitadel
       owner: zitadel
+  enableSuperuserAccess: true
 
   postgresql:
     parameters:
