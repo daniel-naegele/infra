@@ -30,5 +30,5 @@ spec:
         hosts:
           - host: welcher.men.sh
             paths:
-              - path: /login
+              - path: /ui/v2/login
                 pathType: Prefix
