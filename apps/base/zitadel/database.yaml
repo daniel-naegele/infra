@@ -18,9 +18,6 @@ spec:
       secret:
         name: zitadel-pg-user
 
-  superuserSecret:
-    name: zitadel-pg-superuser
-
   postgresql:
     parameters:
       max_connections: "100"
