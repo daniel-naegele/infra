@@ -7,19 +7,18 @@ spec:
   releaseName: jellyfin
   chart:
     spec:
-      timeout: 10m
-      install:
-        timeout: 10m
-      upgrade:
-        timeout: 10m
       chart: jellyfin
       sourceRef:
         kind: HelmRepository
         name: jellyfin
   interval: 50m
+  timeout: 10m
   install:
+    timeout: 10m
     remediation:
       retries: 5
+  upgrade:
+    timeout: 10m
   values:
     ingress:
       enabled: true

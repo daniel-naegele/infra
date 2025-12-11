@@ -7,19 +7,18 @@ spec:
   releaseName: nextcloud
   chart:
     spec:
-      timeout: 10m
-      install:
-        timeout: 10m
-      upgrade:
-        timeout: 10m
       chart: nextcloud
       sourceRef:
         kind: HelmRepository
         name: nextcloud
   interval: 50m
+  timeout: 10m
   install:
+    timeout: 10m
     remediation:
       retries: 5
+  upgrade:
+    timeout: 10m
   values:
     ingress:
       enabled: true
