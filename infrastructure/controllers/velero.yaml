@@ -41,7 +41,6 @@ spec:
         - name: r2
           provider: aws
           bucket: velero-backup
-          prefix: backup
           default: true
           credential:
             name: cloudflare-r2
@@ -53,7 +52,6 @@ spec:
         - name: r2
           provider: aws
           bucket: velero-backup
-          prefix: snapshot
           default: true
           credential:
             name: cloudflare-r2
