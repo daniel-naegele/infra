@@ -1,0 +1,34 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: zitadel
+  namespace: zitadel
+spec:
+  values:
+    ingress:
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        traefik.ingress.kubernetes.io/router.middlewares: default-redirect-https@kubernetescrd
+      tls:
+        - hosts:
+            - welcher.men.sh
+          secretName: zitadel-tls
+      hosts:
+        - host: welcher.men.sh
+          paths:
+            - path: /
+              pathType: Prefix
+    login:
+      ingress:
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          traefik.ingress.kubernetes.io/router.middlewares: default-redirect-https@kubernetescrd
+        tls:
+          - hosts:
+              - welcher.men.sh
+            secretName: zitadel-tls
+        hosts:
+          - host: welcher.men.sh
+            paths:
+              - path: /login
+                pathType: Prefix

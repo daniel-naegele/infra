@@ -1,0 +1,69 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: zitadel
+  namespace: zitadel
+spec:
+  releaseName: zitadel
+  chart:
+    spec:
+      chart: zitadel
+      sourceRef:
+        kind: HelmRepository
+        name: zitadel
+  interval: 50m
+  install:
+    remediation:
+      retries: 3
+  values:
+    zitadel:
+      masterkeySecretName: existing-zitadel-masterkey
+
+      configmapConfig:
+        ExternalDomain: welcher.men.sh
+        ExternalSecure: true
+
+        TLS:
+          Enabled: false
+
+        Database:
+          Postgres:
+            Host: zitadel-pg-rw.default.svc.cluster.local
+            Port: 5432
+            Database: zitadel
+            User:
+              Username: zitadel
+              SSL:
+                Mode: disable
+            Admin:
+              Username: postgres
+              SSL:
+                Mode: disable
+
+    ingress:
+      enabled: true
+      className: traefik
+
+    login:
+      enabled: true
+      ingress:
+        enabled: true
+        className: traefik
+
+    env:
+      - name: ZITADEL_DATABASE_POSTGRES_USER_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: zitadel-pg-user
+            key: password
+      - name: ZITADEL_DATABASE_POSTGRES_ADMIN_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: zitadel-pg-superuser
+            key: password
+    initJob:
+      command: "zitadel"
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
