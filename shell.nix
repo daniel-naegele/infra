@@ -13,7 +13,7 @@ mkShell {
     yq
     kubernetes-helm
     kube-capacity
-    kubectl-view-secert
+    kubectl-view-secret
     velero
   ];
 

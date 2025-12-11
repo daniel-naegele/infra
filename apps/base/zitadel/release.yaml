@@ -33,10 +33,6 @@ spec:
               Username: zitadel
               SSL:
                 Mode: verify-full
-            Admin:
-              Username: postgres
-              SSL:
-                Mode: verify-full
       dbSslCaCrtSecret: zitadel-pg-ca
       dbSslAdminCrtSecret: zitadel-pg-server
       dbSslUserCrtSecret: zitadel-pg-server
@@ -55,13 +51,9 @@ spec:
       - name: ZITADEL_DATABASE_POSTGRES_USER_PASSWORD
         valueFrom:
           secretKeyRef:
-            name: zitadel-pg-user
+            name: zitadel-pg-app
             key: password
-      - name: ZITADEL_DATABASE_POSTGRES_ADMIN_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: zitadel-pg-superuser
-            key: password
+
     initJob:
       command: "zitadel"
     metrics:
