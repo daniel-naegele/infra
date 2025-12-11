@@ -28,7 +28,7 @@ spec:
 
         Database:
           Postgres:
-            Host: zitadel-pg-rw.default.svc.cluster.local
+            Host: zitadel-pg-rw.zitadel.svc.cluster.local
             Port: 5432
             Database: zitadel
             User:
