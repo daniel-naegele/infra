@@ -11,7 +11,7 @@ mkShell {
     age
     headscale
     yq
-    helm
+    kubernetes-helm
     kube-capacity
     velero
   ];
