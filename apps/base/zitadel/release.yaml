@@ -37,6 +37,23 @@ spec:
               Username: postgres
               SSL:
                 Mode: verify-full
+        FirstInstance:
+          Org:
+            Human:
+              # In case UserLoginMustBeDomain is false (default) and you don't overwrite the username with an email,
+              # it will be suffixed by the org domain (org-name + domain from config).
+              # for example zitadel-admin in org ZITADEL on domain.tld -> zitadel-admin@zitadel.domain.tld
+              UserName: zitadel-admin # ZITADEL_FIRSTINSTANCE_ORG_HUMAN_USERNAME
+              FirstName: ZITADEL # ZITADEL_FIRSTINSTANCE_ORG_HUMAN_FIRSTNAME
+              LastName: Admin # ZITADEL_FIRSTINSTANCE_ORG_HUMAN_LASTNAME
+              NickName: # ZITADEL_FIRSTINSTANCE_ORG_HUMAN_NICKNAME
+              DisplayName: # ZITADEL_FIRSTINSTANCE_ORG_HUMAN_DISPLAYNAME
+              Email:
+                # uses the username if empty
+                Address: info@naegele.dev
+                Verified: true # ZITADEL_FIRSTINSTANCE_ORG_HUMAN_EMAIL_VERIFIED
+              Password: Password1! # ZITADEL_FIRSTINSTANCE_ORG_HUMAN_PASSWORD
+              PasswordChangeRequired: true # ZITADEL_FIRSTINSTANCE_ORG_H
       dbSslCaCrtSecret: zitadel-pg-ca
       dbSslAdminCrtSecret: zitadel-pg-server
 
