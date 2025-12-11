@@ -56,6 +56,11 @@ spec:
           secretKeyRef:
             name: zitadel-pg-app
             key: password
+      - name: ZITADEL_DATABASE_POSTGRES_ADMIN_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: zitadel-pg-superuser
+            key: password
 
     initJob:
       command: "zitadel"
