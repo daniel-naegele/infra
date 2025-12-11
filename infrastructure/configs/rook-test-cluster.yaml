@@ -22,7 +22,8 @@ spec:
       enabled: true
     monitoring:
       enabled: true
-
+    cephFileSystemVolumeSnapshotClass:
+      enabled: true
     cephClusterSpec:
       dashboard:
         enabled: true
