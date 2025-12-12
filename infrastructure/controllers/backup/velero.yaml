@@ -40,7 +40,7 @@ spec:
       backupStorageLocation:
         - name: encrypt
           provider: aws
-          bucket: velero-backup
+          bucket: fakebucket
           default: true
           credential:
             name: velero-encrypt-auth
@@ -48,10 +48,11 @@ spec:
           config:
             region: weur
             s3Url: http://velero-encrypt.velero.svc.cluster.local
+            s3ForcePathStyle: "true"
       volumeSnapshotLocation:
         - name: encrypt
           provider: aws
-          bucket: velero-backup
+          bucket: fakebucket
           default: true
           credential:
             name: velero-encrypt-auth

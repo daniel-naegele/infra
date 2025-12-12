@@ -17,6 +17,7 @@ spec:
     app:
       out:
         provider: "Cloudflare"
+        bucket_and_prefix: "velero-backup"
         endpoint: "https://b12e2beeb323c2c78eb536e955adbee1.r2.cloudflarestorage.com"
         region: "weur"
     ingress:
