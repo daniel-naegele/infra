@@ -29,10 +29,8 @@ spec:
         enabled: true
       storage:
         useAllNodes: true
-        useAllDevices: true
-        deviceFilter: sda4
-        config:
-          encryptedDevice: "true"
+        devices:
+          - name: /dev/mapper/pool-osd
 
       resources:
         mgr:

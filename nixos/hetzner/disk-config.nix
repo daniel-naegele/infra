@@ -29,7 +29,7 @@
               };
             };
             luks = {
-              size = "40G";
+              size = "100%";
               content = {
                 type = "luks";
                 name = "crypted";
@@ -42,18 +42,33 @@
                 };
                 # additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
                 content = {
-                  type = "filesystem";
-                  format = "xfs";
-                  mountpoint = "/";
-                  mountOptions = [
-                    "defaults"
-                  ];
+                  type = "lvm_pv";
+                  vg = "pool";
                 };
               };
             };
-            osd = {
-              size = "100%";
+          };
+        };
+      };
+    };
+    lvm_vg = {
+      pool = {
+        type = "lvm_vg";
+        lvs = {
+          os = {
+            size = "100%";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/";
+              mountOptions = [
+                "defaults"
+              ];
             };
+          };
+
+          osd = {
+            size = "30G";
           };
         };
       };
