@@ -30,9 +30,9 @@ spec:
       storage:
         useAllNodes: true
         nodes:
-          - name: worker-01
+          - name: de-fsn1-01
             devices:
-              - name: /dev/pool/osd
+              - name: /dev/disk/by-id/dm-name-pool-osd
 
       resources:
         mgr:
