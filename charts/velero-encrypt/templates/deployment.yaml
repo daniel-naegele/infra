@@ -39,6 +39,7 @@ spec:
           image: "{{ .Values.images.rclone.repository }}:{{ .Values.images.rclone.tag }}"
           imagePullPolicy: {{ .Values.images.rclone.pullPolicy }}
           command:
+          command:
             - "/bin/sh"
             - "-c"
             - "/usr/local/bin/rclone serve s3 fake_s3: --force-path-style=true --addr=:8080 --auth-key \"$REMOTE_ACCESS_KEY,$REMOTE_SECRET_KEY\" --log-level=DEBUG"
@@ -71,11 +72,11 @@ spec:
           {{- end }}
           volumeMounts:
             - name: config
-              mountPath: /root/.config/rclone
+              mountPath: /config/rclone
       volumes:
         - name: config
           secret:
-            secretName: {{ include "encrypt.fullname" . }}
+            secretName: {{ include "encrypt.fullname" . }}-rclone
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
