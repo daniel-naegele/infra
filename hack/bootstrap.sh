@@ -60,8 +60,8 @@ if [ "$secure_boot" == "y" ]; then
   fi
 fi
 
-# provide FDE key
-sops -d "secrets/$machine_hostname.yaml" | yq '.fde_pass' > /tmp/disk-1.key
+# provide FDE key and output raw
+sops -d "secrets/$machine_hostname.yaml" | yq '.fde_pass' -r > /tmp/disk-1.key
 
 # Install NixOS to the host system with our secrets
 nix run github:nix-community/nixos-anywhere -- \
