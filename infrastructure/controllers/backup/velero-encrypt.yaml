@@ -14,6 +14,11 @@ spec:
         namespace: default
   interval: 1h0m0s
   values:
+    app:
+      out:
+        provider: "Cloudflare"
+        endpoint: "https://b12e2beeb323c2c78eb536e955adbee1.r2.cloudflarestorage.com"
+        region: "weur"
     ingress:
       hosts:
         - host: velero-encrypt.men.sh

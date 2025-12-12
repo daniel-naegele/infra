@@ -40,4 +40,4 @@ app:
     provider: "Minio"
     endpoint: "https://restic.example.com"
     region: "us-east-1"
-    bucket_and_prefix: "/server1/k8s"
+    bucket_and_prefix: ""
