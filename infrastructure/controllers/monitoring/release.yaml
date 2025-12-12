@@ -26,15 +26,6 @@ spec:
       interval: 12h
   values:
     grafana:
-      datasources:
-        datasources.yaml:
-          apiVersion: 1
-          datasources:
-            - name: Prometheus
-              type: prometheus
-              url: http://prometheus-kube-prometheus-prometheus:9090
-              access: proxy
-              isDefault: true
       admin:
         existingSecret: grafana-admin
       ingress:
