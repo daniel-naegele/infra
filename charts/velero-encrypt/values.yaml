@@ -13,15 +13,14 @@ images:
 # Ingress for public access (needed because the velero client will query it directly, from outside the cluster)
 ingress:
   enabled: true
-  className: nginx
+  className: traefik
   annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "100m" # avoid "413 Entity Too Large" errors
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt
   hosts:
     - host: velero-encrypt.example.com
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix
   tls:
     - secretName: velero-encrypt.example.com
       hosts:
@@ -29,18 +28,20 @@ ingress:
 
 app:
   # Encryption key used by rclone
-  encryptionKey: "MY-SECURE-ENCRYPTION-KEY"
+  encryptionKeySecret: "velero-encrypt-key"
   # Credentials to authenticate to rclone s3 server
   in:
-    s3AccessKey: "user"
-    s3SecretKey: "S3-SECRET-KEY"
+    secret: velero-encrypt-in
+    s3AccessKey: "s3AccessKey"
+    s3SecretKey: "s3SecretKey"
     # Will create this fake bucket in the encrypted S3
     bucket: "fakebucket"
   # Credentials to authenticate to destination s3 server
   out:
+    secret: velero-encrypt-out
     provider: "Minio"
     endpoint: "https://restic.example.com"
     region: "us-east-1"
     bucket_and_prefix: "/server1/k8s"
-    s3AccessKey: "user"
-    s3SecretKey: "S3-SECRET-KEY"
+    s3AccessKey: "FAKE_REMOTE_ACCESS_KEY"
+    s3SecretKey: "s3SecretKey"
