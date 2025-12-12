@@ -30,7 +30,7 @@ spec:
       storage:
         useAllNodes: true
         devices:
-          - name: /dev/mapper/pool-osd
+          - name: /dev/pool/osd
 
       resources:
         mgr:
