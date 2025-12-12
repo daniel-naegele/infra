@@ -40,7 +40,7 @@ spec:
       backupStorageLocation:
         - name: encrypt
           provider: aws
-          bucket: fakebucket
+          bucket: encrypted
           default: true
           credential:
             name: velero-encrypt-auth
@@ -52,7 +52,7 @@ spec:
       volumeSnapshotLocation:
         - name: encrypt
           provider: aws
-          bucket: fakebucket
+          bucket: encrypted
           default: true
           credential:
             name: velero-encrypt-auth

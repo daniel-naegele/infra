@@ -15,6 +15,8 @@ spec:
   interval: 1h0m0s
   values:
     app:
+      in:
+        bucket: encrypted
       out:
         provider: "Cloudflare"
         bucket_and_prefix: "velero-backup"

@@ -16,7 +16,7 @@ spec:
           - |
             set -e
             # Create the bucket
-            # mc mb fake_s3/{{ .Values.app.in.bucket }} -p
+            mc mb fake_s3/{{ .Values.app.in.bucket }} -p
             # create a dummy object to make remote actually create the bucket
             echo "keep" | mc pipe fake_s3/{{ .Values.app.in.bucket }}/.keep
 
