@@ -46,12 +46,12 @@ spec:
             - name: REMOTE_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{.Values.app.in }}
+                  name: {{ include "encrypt.fullname" . }}
                   key: FAKE_REMOTE_ACCESS_KEY
             - name: REMOTE_SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{.Values.app.in }}
+                  name: {{ include "encrypt.fullname" . }}
                   key: FAKE_REMOTE_SECRET_KEY
           ports:
             - name: http

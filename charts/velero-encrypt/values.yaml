@@ -32,8 +32,6 @@ app:
   # Credentials to authenticate to rclone s3 server
   in:
     secret: velero-encrypt-in
-    s3AccessKey: "s3AccessKey"
-    s3SecretKey: "s3SecretKey"
     # Will create this fake bucket in the encrypted S3
     bucket: "fakebucket"
   # Credentials to authenticate to destination s3 server
@@ -43,5 +41,3 @@ app:
     endpoint: "https://restic.example.com"
     region: "us-east-1"
     bucket_and_prefix: "/server1/k8s"
-    s3AccessKey: "FAKE_REMOTE_ACCESS_KEY"
-    s3SecretKey: "s3SecretKey"
