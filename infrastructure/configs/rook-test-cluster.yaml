@@ -29,8 +29,10 @@ spec:
         enabled: true
       storage:
         useAllNodes: true
-        devices:
-          - name: /dev/pool/osd
+        nodes:
+          - name: worker-01
+            devices:
+              - name: /dev/pool/osd
 
       resources:
         mgr:
