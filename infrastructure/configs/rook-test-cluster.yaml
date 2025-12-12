@@ -31,6 +31,8 @@ spec:
         useAllNodes: true
         useAllDevices: true
         deviceFilter: sda4
+        config:
+          encryptedDevice: "true"
 
       resources:
         mgr:
