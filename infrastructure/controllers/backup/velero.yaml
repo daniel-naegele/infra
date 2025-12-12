@@ -47,7 +47,7 @@ spec:
             key: file
           config:
             region: weur
-            s3Url: http://velero-encrypt.velero.svc.cluster.local
+            s3Url: https://velero-encrypt.men.sh
             s3ForcePathStyle: "true"
       volumeSnapshotLocation:
         - name: encrypt
@@ -59,4 +59,5 @@ spec:
             key: file
           config:
             region: weur
-            s3Url: http://velero-encrypt.velero.svc.cluster.local
+            s3Url: https://velero-encrypt.men.sh
+            s3ForcePathStyle: "true"
