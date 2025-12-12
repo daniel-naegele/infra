@@ -3,6 +3,16 @@ entries:
   velero-encrypt:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2025-12-12T02:53:57.009888147Z"
+    description: A Helm chart for Kubernetes
+    digest: e7b0dc4b452edbe09a252611bf81bce6de0f65a3ae017eb0098c902f5e1499bd
+    name: velero-encrypt
+    type: application
+    urls:
+    - https://github.com/daniel-naegele/infra/releases/download/velero-encrypt-0.1.6/velero-encrypt-0.1.6.tgz
+    version: 0.1.6
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2025-12-12T02:04:00.220495918Z"
     description: A Helm chart for Kubernetes
     digest: f1e147eede414bb740fa54afcb6346ee58e7e9e7c2963db7ebde45303a99d3eb
@@ -61,4 +71,4 @@ entries:
     urls:
     - https://github.com/daniel-naegele/infra/releases/download/velero-encrypt-0.1.0/velero-encrypt-0.1.0.tgz
     version: 0.1.0
-generated: "2025-12-12T02:04:00.220517949Z"
+generated: "2025-12-12T02:53:57.009935535Z"
