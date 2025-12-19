@@ -36,6 +36,7 @@ spec:
           enabled: false
         zfs:
           enabled: false
+      replicated:
         mayastor:
           enabled: false
     openebs-crds:
