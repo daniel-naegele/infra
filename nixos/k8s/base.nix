@@ -8,7 +8,7 @@
     tokenFile = config.sops.secrets.k3s_token.path;
     extraFlags = [
       "--tls-san=controlplane.men.sh"
-      "--node-label=openebs.io/engine=mayastor"
+      "--disable=local-storage"
     ];
     serverAddr = "https://controlplane.men.sh:6443";
   };

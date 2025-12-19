@@ -36,6 +36,8 @@ spec:
           enabled: false
         zfs:
           enabled: false
+        mayastor:
+          enabled: false
     openebs-crds:
       csi:
         volumeSnapshots:
