@@ -7,5 +7,6 @@ resources:
   - weave-gitops.yaml
   - ./backup
   - cnpg.yaml
-  - rook.yaml
+  - openebs.yaml
+  #  - rook.yaml
   - ./monitoring

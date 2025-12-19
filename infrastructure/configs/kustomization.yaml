@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
   - cloudflare-secrets.yaml
   - cluster-issuers.yaml
-  - rook-test-cluster.yaml
+  #  - rook-test-cluster.yaml
   - traefik.yaml

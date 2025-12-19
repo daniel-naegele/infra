@@ -33,6 +33,10 @@ read -p "" machine_hostname
 echo "Please define the target host (e.g. root@my-ip)"
 read -p "" target_host
 
+echo "Please define the SSH port (default: 22)"
+read -p "" ssh_port
+ssh_port=${ssh_port:-22}
+
 echo "Setup secure boot? (y/n)"
 read -p "" secure_boot
 
@@ -69,6 +73,7 @@ nix run github:nix-community/nixos-anywhere -- \
   --extra-files "$temp" \
   --flake ".#$machine_hostname" \
   --target-host "$target_host" \
+  --ssh-port "$ssh_port" \
   --debug
 
 rm /tmp/disk-1.key

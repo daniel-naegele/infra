@@ -11,7 +11,10 @@
     ./initrd.nix
   ];
 
-  boot.kernelParams = [ "ip=dhcp" ];
+  boot.kernelParams = [
+    "ip=dhcp"
+    "nvme_core.multipath=Y"
+  ];
   boot.kernelModules = [
     "rbd"
     "nbd"
@@ -19,12 +22,12 @@
     "e1000e"
     "iwlwifi"
     "nft-expr-counter"
+    "nvme-tcp"
   ];
   boot.kernel.sysctl = {
     "fs.inotify.max_user_watches" = 524288;
+    "vm.nr_hugepages" = 1024;
   };
-  boot.supportedFilesystems = [ "zfs" ];
-  boot.zfs.requestEncryptionCredentials = true;
 
   boot.loader = {
     systemd-boot.enable = false;

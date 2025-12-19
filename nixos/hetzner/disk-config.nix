@@ -59,14 +59,13 @@
             size = "100%";
             content = {
               type = "filesystem";
-              format = "ext4";
+              format = "xfs";
               mountpoint = "/";
               mountOptions = [
                 "defaults"
               ];
             };
           };
-
           osd = {
             size = "30G";
           };
