@@ -1,0 +1,40 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: stalwart
+  namespace: stalwart
+spec:
+  releaseName: stalwart
+  chart:
+    spec:
+      chart: stalwart
+      sourceRef:
+        kind: HelmRepository
+        name: stalwart
+  interval: 50m
+  install:
+    remediation:
+      retries: 3
+  values:
+    backup:
+      enabled: false
+    grafana:
+      dashboards:
+        enabled: true
+    certificate:
+      certmanager:
+        issuerRef:
+          name: letsencrypt
+        dnsNames:
+          - mx.men.sh
+    ingress:
+      enabled: true
+      tls:
+        - secretName: stalwart-tls
+          hosts:
+            - mx.men.sh
+      hosts:
+        - host: mx.men.sh
+          paths:
+            - path: /
+              pathType: Prefix
