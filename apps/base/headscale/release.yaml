@@ -16,6 +16,12 @@ spec:
     remediation:
       retries: 3
   values:
+    persistence:
+      config:
+        enabled: true
+        mountPath: /etc/headscale
+        retain: true
+        storageClass: "openebs-hostpath"
     image:
       tag: v0.27.1
     env:

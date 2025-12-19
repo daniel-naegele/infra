@@ -3,9 +3,9 @@ kind: Kustomization
 resources:
   - ../base/podinfo
   - ../base/zitadel
+  - ../base/headscale
   - ../base/nextcloud
   - ../base/jellyfin
-  - ../base/headscale
 patches:
   - path: podinfo-values.yaml
     target:
