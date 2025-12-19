@@ -39,7 +39,21 @@ spec:
       replicated:
         mayastor:
           enabled: false
-    openebs-crds:
-      csi:
-        volumeSnapshots:
-          enabled: false
+
+    loki:
+      enabled: true
+
+      loki:
+        commonConfig:
+          replication_factor: 1
+
+      singleBinary:
+        replicas: 1
+        drivesPerNode: 1
+        persistence:
+          enabled: true
+
+      minio:
+        enabled: true
+        replicas: 1
+        mode: standalone
