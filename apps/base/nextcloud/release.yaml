@@ -79,8 +79,8 @@ spec:
         );
     redis:
       enabled: true
-      replica:
-        replicaCount: 3
+      global:
+        storageClass: "openebs-hostpath"
     cronjob:
       enabled: true
     internalDatabase:

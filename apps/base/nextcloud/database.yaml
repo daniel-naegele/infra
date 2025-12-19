@@ -1,27 +1,23 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: nextcloud-cluster
+  name: nextcloud-pg
   namespace: nextcloud
 spec:
   instances: 1
-  storage:
-    size: 1Gi
   monitoring:
     enablePodMonitor: true
-  managed:
-    roles:
-      - name: app
-        createdb: true
-        login: true
----
-apiVersion: postgresql.cnpg.io/v1
-kind: Database
-metadata:
-  name: nextcloud-db
-  namespace: nextcloud
-spec:
-  name: nextcloud
-  owner: app
-  cluster:
-    name: nextcloud-cluster
+
+  storage:
+    size: 1Gi
+    storageClass: openebs-hostpath
+  bootstrap:
+    initdb:
+      database: nextcloud-db
+      owner: app
+  enableSuperuserAccess: true
+
+  postgresql:
+    parameters:
+      max_connections: "100"
+      shared_buffers: "256MB"
