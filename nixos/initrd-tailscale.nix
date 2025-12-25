@@ -17,6 +17,9 @@ in
 
     systemd.services.tailscaled = {
       wantedBy = [ "initrd.target" ];
+      before = [
+        "zfs-import-zroot.service"
+      ];
       serviceConfig.Environment = [
         "PORT=${toString cfg.port}"
         ''"FLAGS=--tun ${lib.escapeShellArg cfg.interfaceName}"''
@@ -51,6 +54,9 @@ in
     systemd.services.tailscale-autoconnect = {
       description = "Automatic connection to Tailscale";
 
+      before = [
+        "zfs-import-zroot.service"
+      ];
       after = [
         "network-pre.target"
         "tailscaled.service"

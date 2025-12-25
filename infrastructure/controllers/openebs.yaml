@@ -30,14 +30,6 @@ spec:
     remediation:
       retries: 3
   values:
-    zfs-localpv:
-      crds:
-        zfsLocalPv:
-          enabled: true
-        csi:
-          volumeSnapshots:
-            enabled: true
-
     engines:
       local:
         lvm:
