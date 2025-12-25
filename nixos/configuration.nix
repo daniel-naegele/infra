@@ -99,6 +99,7 @@
   };
 
   services.zfs.autoScrub.enable = true;
+  services.tailscale.enable = true;
 
   sops.secrets.k3s_token = {
     format = "binary";

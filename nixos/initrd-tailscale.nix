@@ -17,11 +17,6 @@ in
 
     systemd.services.tailscaled = {
       wantedBy = [ "initrd.target" ];
-      before = [
-        "zfs-load-key.service"
-        "zfs-load-key@.service"
-        "zfs-import-zroot.service"
-      ];
       serviceConfig.Environment = [
         "PORT=${toString cfg.port}"
         ''"FLAGS=--tun ${lib.escapeShellArg cfg.interfaceName}"''
@@ -56,11 +51,6 @@ in
     systemd.services.tailscale-autoconnect = {
       description = "Automatic connection to Tailscale";
 
-      before = [
-        "zfs-load-key.service"
-        "zfs-load-key@.service"
-        "zfs-import-zroot.service"
-      ];
       after = [
         "network-pre.target"
         "tailscaled.service"
@@ -88,29 +78,8 @@ in
         fi
 
         # otherwise authenticate with tailscale using the key from secrets
-        ${tailscale}/bin/tailscale --socket /run/tailscale/tailscaled.sock up --auth-key file:/etc/secrets/ts_auth_key
+        ${tailscale}/bin/tailscale --socket /run/tailscale/tailscaled.sock up --auth-key file:${config.sops.secrets.tailscale_preauth.path} --login-server https://ts.men.sh --hostname initrd-${config.networking.hostName}
       '';
-    };
-
-    # Ensure all ZFS key-load units wait for tailscaled in initrd
-    systemd.services."zfs-load-key@".unitConfig = {
-      Wants = [ "tailscaled.service" ];
-      After = [ "tailscaled.service" ];
-    };
-    systemd.services."zfs-load-key".unitConfig = {
-      Wants = [ "tailscaled.service" ];
-      After = [ "tailscaled.service" ];
-    };
-
-    systemd.services."zfs-import-zroot".unitConfig = {
-      Wants = [
-        "tailscaled.service"
-        "tailscale-autoconnect.service"
-      ];
-      After = [
-        "tailscaled.service"
-        "tailscale-autoconnect.service"
-      ];
     };
   };
 }

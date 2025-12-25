@@ -42,8 +42,8 @@
                 };
                 # additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
                 content = {
-                  type = "lvm_pv";
-                  vg = "pool";
+                  type = "zfs";
+                  pool = "zroot";
                 };
               };
             };
@@ -51,23 +51,28 @@
         };
       };
     };
-    lvm_vg = {
-      pool = {
-        type = "lvm_vg";
-        lvs = {
-          os = {
-            size = "100%";
-            content = {
-              type = "filesystem";
-              format = "xfs";
-              mountpoint = "/";
-              mountOptions = [
-                "defaults"
-              ];
-            };
+    zpool = {
+      zroot = {
+        type = "zpool";
+        rootFsOptions = {
+          mountpoint = "none";
+          compression = "zstd";
+          acltype = "posixacl";
+          xattr = "sa";
+
+          "com.sun:auto-snapshot" = "true";
+        };
+        options.ashift = "12";
+
+        datasets = {
+          "root" = {
+            type = "zfs_fs";
+            mountpoint = "/";
           };
-          osd = {
-            size = "30G";
+          "root/nix" = {
+            type = "zfs_fs";
+            options.mountpoint = "/nix";
+            mountpoint = "/nix";
           };
         };
       };
