@@ -21,7 +21,7 @@ spec:
         enabled: true
         mountPath: /etc/headscale
         retain: true
-        storageClass: "openebs-hostpath"
+        storageClass: "openebs-zfs"
     image:
       tag: v0.27.1
     env:

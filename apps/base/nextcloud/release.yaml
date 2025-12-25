@@ -80,7 +80,7 @@ spec:
     redis:
       enabled: true
       global:
-        storageClass: "openebs-hostpath"
+        storageClass: "openebs-zfs"
     cronjob:
       enabled: true
     internalDatabase:
