@@ -68,6 +68,6 @@ parameters:
   compression: "zstd"
   dedup: "off"
   fstype: "zfs"
-  poolname: "zfspv-pool"
+  poolname: "zroot"
 provisioner: zfs.csi.openebs.io
 volumeBindingMode: WaitForFirstConsumer
