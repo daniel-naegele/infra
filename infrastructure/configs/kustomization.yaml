@@ -5,3 +5,4 @@ resources:
   - cluster-issuers.yaml
   #  - rook-test-cluster.yaml
   - traefik.yaml
+  - zfs-storageclass.yaml

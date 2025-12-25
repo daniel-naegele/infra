@@ -65,6 +65,9 @@
         options.ashift = "12";
 
         datasets = {
+          "k8s" = {
+
+          };
           "root" = {
             type = "zfs_fs";
             mountpoint = "/";
