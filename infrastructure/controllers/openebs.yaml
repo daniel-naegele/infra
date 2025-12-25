@@ -30,6 +30,11 @@ spec:
     remediation:
       retries: 3
   values:
+    zfs-localpv:
+      zfs:
+        # If you use a non-standard path to the zfs binary, specify it here
+        # bin: /run/current-system/sw/bin/zfs
+        bin: /run/current-system/sw/bin/zfs
     engines:
       local:
         lvm:
