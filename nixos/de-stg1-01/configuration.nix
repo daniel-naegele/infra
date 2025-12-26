@@ -11,11 +11,11 @@
     ./disk-config.nix
     ./hardware-configuration.nix
     ../configuration.nix
-    ../k8s/bootstrap.nix
-    ../bios-boot.nix
+    ../k8s/agent.nix
+    ../secure-boot.nix
   ];
 
-  sops.defaultSopsFile = ../../secrets/de-fsn1-01.yaml;
+  sops.defaultSopsFile = ../../secrets/de-stg1-01.yaml;
 
   networking = {
     hostId = "f4f9b7d5";
@@ -23,15 +23,7 @@
       address = "fe80::1";
       interface = "enp1s0";
     };
-    interfaces.enp1s0 = {
-      ipv6.addresses = [
-        {
-          address = "2a01:4f8:c014:ea20::1";
-          prefixLength = 64;
-        }
-      ];
-    };
   };
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }

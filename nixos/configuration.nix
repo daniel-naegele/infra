@@ -107,5 +107,4 @@
     sopsFile = ../secrets/k3s.bin;
   };
 
-  system.stateVersion = "24.11";
 }

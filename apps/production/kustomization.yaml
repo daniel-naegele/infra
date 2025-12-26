@@ -4,8 +4,8 @@ resources:
   - ../base/podinfo
   - ../base/zitadel
   - ../base/headscale
-  - ../base/nextcloud
-  - ../base/jellyfin
+#  - ../base/nextcloud
+#  - ../base/jellyfin
 patches:
   - path: podinfo-values.yaml
     target:
@@ -15,11 +15,11 @@ patches:
     target:
       kind: HelmRelease
       name: zitadel
-  - path: nextcloud-values.yaml
-    target:
-      kind: HelmRelease
-      name: nextcloud
-  - path: jellyfin-values.yaml
-    target:
-      kind: HelmRelease
-      name: jellyfin
+#  - path: nextcloud-values.yaml
+#    target:
+#      kind: HelmRelease
+#      name: nextcloud
+#  - path: jellyfin-values.yaml
+#    target:
+#      kind: HelmRelease
+#      name: jellyfin

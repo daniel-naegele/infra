@@ -1,19 +1,14 @@
 { ... }:
 {
+  # Assumes an 80GB disk
   disko.devices = {
     disk = {
       root = {
         type = "disk";
-        device = "/dev/sda";
+        device = "/dev/disk/by-id/nvme-KXG50PNV1T02_NVMe_TOSHIBA_1024GB_39HZZ020F9BN";
         content = {
           type = "gpt";
           partitions = {
-            bios_grub = {
-              start = "2M";
-              size = "2M";
-              type = "EF02"; # bios_grub
-              # no content
-            };
             ESP = {
               size = "1G";
               type = "EF00";
