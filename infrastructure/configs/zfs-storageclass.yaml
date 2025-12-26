@@ -13,3 +13,12 @@ parameters:
   mountOptions: "noatime" # optional
 provisioner: zfs.csi.openebs.io
 volumeBindingMode: WaitForFirstConsumer
+---
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshotClass
+metadata:
+  name: openebs-zfs-snap
+  labels:
+    velero.io/csi-volumesnapshot-class: "true"
+driver: zfs.csi.openebs.io
+deletionPolicy: Delete
