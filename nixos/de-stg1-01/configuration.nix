@@ -18,7 +18,7 @@
   sops.defaultSopsFile = ../../secrets/de-stg1-01.yaml;
 
   networking = {
-    hostId = "f4f9b7d5";
+    hostId = "945ece5e";
     defaultGateway6 = {
       address = "fe80::1";
       interface = "enp1s0";

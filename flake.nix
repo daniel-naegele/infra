@@ -119,6 +119,10 @@
           system = "x86_64-linux";
           config = ./nixos/hetzner/de-fsn1-01.nix;
         };
+        de-stg1-01 = {
+          system = "x86_64-linux";
+          config = ./nixos/de-stg1-01/configuration.nix;
+        };
       };
     in
     {
