@@ -49,3 +49,4 @@ spec:
             region: weur
             s3Url: https://b12e2beeb323c2c78eb536e955adbee1.r2.cloudflarestorage.com
             s3ForcePathStyle: "true"
+      volumeSnapshotLocation: []
