@@ -8,4 +8,4 @@ resources:
   - cnpg.yaml
   - openebs.yaml
   #  - rook.yaml
-  - ./monitoring
+  #- ./monitoring
