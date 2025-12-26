@@ -60,7 +60,7 @@
 
         datasets = {
           "k8s" = {
-
+            type = "zfs_fs";
           };
           "root" = {
             type = "zfs_fs";

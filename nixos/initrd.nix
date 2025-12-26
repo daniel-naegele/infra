@@ -10,6 +10,7 @@
   boot.initrd = {
     availableKernelModules = [ "igc" ];
     kernelModules = [
+      "igb"
       "e1000e"
       "iwlwifi"
       "tpm_crb"
@@ -52,23 +53,6 @@
       };
 
       tpm2.enable = true;
-      /*
-        services.unlock = {
-        unitConfig = {
-          Type = "simple";
-        };
-        path = with pkgs; [
-          clevis
-          curl
-        ];
-        wantedBy = [ "initrd.target" ];
-        script = ''
-          zpool import -a;
-          echo $(curl -s "http://clevis.local/the-encrypted-keyfile" | clevis decrypt) | zfs load-key -a && killall zfs
-        '';
-        };
-      */
-
     };
 
     network = {

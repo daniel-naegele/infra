@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
+  lib,
   ...
 }:
 {
@@ -21,9 +22,14 @@
     hostId = "945ece5e";
     defaultGateway6 = {
       address = "fe80::1";
-      interface = "enp1s0";
+      interface = "enp4s0";
     };
   };
 
-  system.stateVersion = "25.05";
+  boot.initrd.systemd.network.networks."10-lan" = {
+    linkConfig.MACAddress = "a8:a1:59:08:2c:bf";
+    matchConfig.Name = lib.mkForce "enp4s0";
+  };
+
+  system.stateVersion = "25.11";
 }

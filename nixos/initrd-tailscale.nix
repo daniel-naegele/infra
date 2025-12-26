@@ -9,6 +9,9 @@ let
 in
 {
   boot.initrd = {
+    secrets = {
+      "/etc/ts/auth_key" = config.sops.secrets.tailscale_preauth.path;
+    };
     systemd.packages = [ cfg.package ];
     availableKernelModules = [
       "tun"
@@ -18,12 +21,20 @@ in
     systemd.services.tailscaled = {
       wantedBy = [ "initrd.target" ];
       before = [
-        "zfs-import-zroot.service"
+        "cryptsetup-pre.target"
       ];
-      serviceConfig.Environment = [
-        "PORT=${toString cfg.port}"
-        ''"FLAGS=--tun ${lib.escapeShellArg cfg.interfaceName}"''
-      ];
+      serviceConfig = {
+        Environment = [
+          "PORT=${toString cfg.port}"
+          ''"FLAGS=--tun ${lib.escapeShellArg cfg.interfaceName}"''
+        ];
+      };
+      script = ''
+        mkdir -p /run/tailscale-initrd
+        ${pkgs.tailscale}/bin/tailscaled \
+          --state=/run/tailscale-initrd.state \
+          --socket /run/tailscale-initrd/tailscaled.sock
+      '';
     };
 
     systemd.network.networks."50-tailscale" = {
@@ -55,7 +66,7 @@ in
       description = "Automatic connection to Tailscale";
 
       before = [
-        "zfs-import-zroot.service"
+        "cryptsetup-pre.target"
       ];
       after = [
         "network-pre.target"
@@ -84,7 +95,11 @@ in
         fi
 
         # otherwise authenticate with tailscale using the key from secrets
-        ${tailscale}/bin/tailscale --socket /run/tailscale/tailscaled.sock up --auth-key file:${config.sops.secrets.tailscale_preauth.path} --login-server https://ts.men.sh --hostname initrd-${config.networking.hostName}
+        ${tailscale}/bin/tailscale \
+        --socket /run/tailscale-initrd/tailscaled.sock up \
+        --auth-key file:/etc/ts/auth_key \
+        --login-server https://ts.men.sh \
+        --hostname initrd-${config.networking.hostName}
       '';
     };
   };
