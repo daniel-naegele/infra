@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ww-gitops
+  namespace: flux-system
+spec:
+  values:
+    oidcSecret:
+      issuerURL: "https://welcher.men.sh"
+      redirectURL: "https://gitops.men.sh/oauth2/callback"
+    ingress:
+      tls:
+        - secretName: weave-tls
+          hosts:
+            - gitops.men.sh
+      hosts:
+        - host: gitops.men.sh
+          paths:
+            - path: /
+              pathType: Prefix

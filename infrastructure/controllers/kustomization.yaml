@@ -3,9 +3,7 @@ kind: Kustomization
 resources:
   - custom-charts.yaml
   - cert-manager.yaml
-  - weave-gitops.yaml
   - ./backup
   - cnpg.yaml
   - openebs.yaml
-  #  - rook.yaml
-  #- ./monitoring
+  - rook.yaml
