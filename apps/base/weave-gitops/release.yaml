@@ -17,6 +17,9 @@ spec:
         name: ww-gitops
   interval: 1h0m0s
   values:
+    envVars:
+      - name: WEAVE_GITOPS_FEATURE_GITOPS_RUNTIME
+        value: "true"
     adminUser:
       create: true
       passwordHash: $2a$10$mf/vrByOsn5cyzwUYFVyS.eB6TJ4S69aXmZUKnN578bZcbm90V5J6
