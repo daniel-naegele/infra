@@ -11,7 +11,7 @@ patches:
   - path: weave-gitops-values.yaml
     target:
       kind: HelmRelease
-      name: weave-gitops
+      name: ww-gitops
   - path: zitadel-values.yaml
     target:
       kind: HelmRelease

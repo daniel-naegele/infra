@@ -6,9 +6,6 @@ metadata:
   namespace: flux-system
 spec:
   values:
-    oidcSecret:
-      issuerURL: "https://welcher.men.sh"
-      redirectURL: "https://gitops.men.sh/oauth2/callback"
     ingress:
       tls:
         - secretName: weave-tls
