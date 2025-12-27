@@ -17,12 +17,6 @@ spec:
         name: ww-gitops
   interval: 1h0m0s
   values:
-    oidcSecret:
-      create: true
-      clientID: "352899923928154356"
-      clientSecret: ""
-      issuerURL: "https://welcher.men.sh"
-      redirectURL: "https://dev.gitops.men.sh/oauth2/callback"
     adminUser:
       create: true
       passwordHash: $2a$10$mf/vrByOsn5cyzwUYFVyS.eB6TJ4S69aXmZUKnN578bZcbm90V5J6
