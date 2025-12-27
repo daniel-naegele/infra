@@ -17,6 +17,12 @@
 
   sops.defaultSopsFile = ../../secrets/de-fsn1-01.yaml;
 
+  services.k3s.extraFlags = [
+    #"--node-ip=100.64.0.14"
+    #"--flannel-iface=tailscale0"
+    "--node-external-ip=23.88.118.192,2a01:4f8:c014:ea20::1"
+  ];
+
   networking = {
     hostId = "f4f9b7d5";
     defaultGateway6 = {

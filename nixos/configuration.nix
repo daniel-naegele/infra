@@ -27,6 +27,7 @@
   boot.kernel.sysctl = {
     "fs.inotify.max_user_watches" = 524288;
     "vm.nr_hugepages" = 1024;
+    "net.ipv4.ip_forward" = 1;
   };
 
   boot.loader = {
@@ -107,4 +108,5 @@
     sopsFile = ../secrets/k3s.bin;
   };
 
+  time.timeZone = "Europe/Berlin";
 }

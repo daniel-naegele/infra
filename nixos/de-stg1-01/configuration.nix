@@ -18,6 +18,11 @@
 
   sops.defaultSopsFile = ../../secrets/de-stg1-01.yaml;
 
+  services.k3s.extraFlags = [
+    "--node-ip=100.64.0.11"
+    "--flannel-iface=tailscale0"
+  ];
+
   networking = {
     hostId = "945ece5e";
     defaultGateway6 = {

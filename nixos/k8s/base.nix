@@ -6,10 +6,7 @@
   services.k3s = {
     enable = true;
     tokenFile = config.sops.secrets.k3s_token.path;
-    extraFlags = [
-      "--tls-san=controlplane.men.sh"
-      "--disable=local-storage"
-    ];
+
     serverAddr = "https://controlplane.men.sh:6443";
   };
 
