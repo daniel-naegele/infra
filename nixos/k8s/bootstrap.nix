@@ -9,7 +9,7 @@
 
   services.k3s = {
     # Enables etcd
-    clusterInit = true;
+    #    clusterInit = true;
     serverAddr = lib.mkForce "";
     extraFlags = [
       "--tls-san=controlplane.men.sh,de-fsn1-01,100.64.0.14"

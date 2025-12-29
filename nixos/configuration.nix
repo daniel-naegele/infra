@@ -67,6 +67,7 @@
     wget
     inputs.unstable.legacyPackages.${pkgs.system}.sbctl
     tailscale
+    tcpdump
   ];
 
   security.sudo.wheelNeedsPassword = false;
