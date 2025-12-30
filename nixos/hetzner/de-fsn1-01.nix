@@ -18,8 +18,8 @@
   sops.defaultSopsFile = ../../secrets/de-fsn1-01.yaml;
 
   services.k3s.extraFlags = [
-    #"--node-ip=100.64.0.14"
-    #"--flannel-iface=tailscale0"
+    "--node-ip=100.64.0.1"
+    "--flannel-iface=tailscale0"
   ];
 
   networking = {
