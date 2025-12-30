@@ -51,7 +51,7 @@ spec:
       namespace: velero
       features: EnableCSI
       backupStorageLocation:
-        - name: encrypt
+        - name: r2
           provider: aws
           bucket: velero-backup
           default: true
@@ -63,7 +63,7 @@ spec:
             s3Url: https://b12e2beeb323c2c78eb536e955adbee1.r2.cloudflarestorage.com
             s3ForcePathStyle: "true"
       volumeSnapshotLocation:
-        - name: encrypt
+        - name: r2
           provider: openebs.io/zfspv-blockstore
           config:
             bucket: velero-backup
