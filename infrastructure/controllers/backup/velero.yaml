@@ -27,13 +27,26 @@ spec:
         name: velero
   interval: 1h0m0s
   values:
+    deployNodeAgent: true
+    kubectl:
+      image:
+        repository: public.ecr.aws/bitnami/kubectl
+        tag: latest
     initContainers:
+      - name: openebs-plugin
+        image: openebs/velero-plugin:3.6.0
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - mountPath: /target
+            name: plugins
       - name: velero-plugin-for-aws
         image: velero/velero-plugin-for-aws:v1.13.1
         imagePullPolicy: IfNotPresent
         volumeMounts:
           - mountPath: /target
             name: plugins
+    credentials:
+      useExistingSecret: velero-auth
     configuration:
       namespace: velero
       features: EnableCSI
@@ -49,4 +62,14 @@ spec:
             region: weur
             s3Url: https://b12e2beeb323c2c78eb536e955adbee1.r2.cloudflarestorage.com
             s3ForcePathStyle: "true"
-      volumeSnapshotLocation: []
+      volumeSnapshotLocation:
+        - name: encrypt
+          provider: openebs.io/zfspv-blockstore
+          config:
+            bucket: velero-backup
+            prefix: zfs
+            namespace: openebs # this is the namespace where ZFS-LocalPV creates all the CRs, passed as OPENEBS_NAMESPACE env in the ZFS-LocalPV deployment
+            provider: aws
+            region: weur
+            s3ForcePathStyle: "true"
+            s3Url: https://b12e2beeb323c2c78eb536e955adbee1.r2.cloudflarestorage.com
