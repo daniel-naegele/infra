@@ -45,8 +45,6 @@ spec:
         volumeMounts:
           - mountPath: /target
             name: plugins
-    credentials:
-      useExistingSecret: velero-auth
     configuration:
       namespace: velero
       features: EnableCSI
@@ -57,7 +55,7 @@ spec:
           default: true
           credential:
             name: velero-auth
-            key: file
+            key: cloud
           config:
             region: weur
             s3Url: https://b12e2beeb323c2c78eb536e955adbee1.r2.cloudflarestorage.com
@@ -70,6 +68,10 @@ spec:
             prefix: zfs
             namespace: openebs # this is the namespace where ZFS-LocalPV creates all the CRs, passed as OPENEBS_NAMESPACE env in the ZFS-LocalPV deployment
             provider: aws
+
+            credential:
+              name: velero-auth
+              key: cloud
             region: weur
             s3ForcePathStyle: "true"
             s3Url: https://b12e2beeb323c2c78eb536e955adbee1.r2.cloudflarestorage.com
