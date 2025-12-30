@@ -63,15 +63,14 @@ spec:
       volumeSnapshotLocation:
         - name: r2
           provider: openebs.io/zfspv-blockstore
+          credential:
+            name: velero-auth
+            key: cloud
           config:
             bucket: velero-backup
             prefix: zfs
             namespace: openebs # this is the namespace where ZFS-LocalPV creates all the CRs, passed as OPENEBS_NAMESPACE env in the ZFS-LocalPV deployment
             provider: aws
-
-            credential:
-              name: velero-auth
-              key: cloud
             region: weur
             s3ForcePathStyle: "true"
             s3Url: https://b12e2beeb323c2c78eb536e955adbee1.r2.cloudflarestorage.com
