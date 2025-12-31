@@ -48,6 +48,7 @@ spec:
     configuration:
       namespace: velero
       features: EnableCSI
+      uploaderType: restic
       backupStorageLocation:
         - name: r2
           provider: aws
