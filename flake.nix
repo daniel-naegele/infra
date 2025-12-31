@@ -113,7 +113,7 @@
       nixosHostConfigurations = mapAttrs' mkNixOsConfiguration {
         de-man1-01 = {
           system = "x86_64-linux";
-          config = ./nixos/nuc/nuc.nix;
+          config = ./nixos/de-man1-01/configuration.nix;
         };
         de-fsn1-01 = {
           system = "x86_64-linux";

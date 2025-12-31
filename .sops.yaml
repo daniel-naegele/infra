@@ -9,7 +9,7 @@ keys:
   - &machine_k8s age13vnmsvg4s2uxzz4rm3apnt4dpczc5njans0el4d3glx92atynf8sla5l7x
   - &bootstrap age1pua3x7g9qxwy4tzvl640smthfzqk08f7zws2ucjd3t40dm9m0pasm4meqx
   # Private key from NUC machine (not the initrd host key)
-  - &machine_nuc age1pua3x7g9qxwy4tzvl640smthfzqk08f7zws2ucjd3t40dm9m0pasm4meqx
+  - &machine_de-man1-01 age10jewvf359nwnyklmugd42maw7ukk0qcq09h4uy3aa4jkq5a3cqcq962hfc
   - &machine_de-fsn1-01 age18rsr24209nzg82zsmhxnw35xtmf4fukmxfdxdl9luper0rn5vytshr75ps
   - &machine_de-stg1-01 age1prfckknfw0nru53kwxd3965dyqwkfkjafut5ezvd6u2mng2kf92qxp9vw6
 creation_rules:
@@ -25,6 +25,6 @@ creation_rules:
       - age:
           - *admin_daniel
           - *bootstrap
-          - *machine_nuc
+          - *machine_de-man1-01
           - *machine_de-fsn1-01
           - *machine_de-stg1-01

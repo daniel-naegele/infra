@@ -18,11 +18,23 @@
                 mountOptions = [ "nofail" ];
               };
             };
-            zfs = {
+            luks = {
               size = "100%";
               content = {
-                type = "zfs";
-                pool = "zroot";
+                type = "luks";
+                name = "crypted";
+                extraOpenArgs = [ ];
+                passwordFile = "/tmp/disk-1.key";
+                settings = {
+                  # if you want to use the key for interactive login be sure there is no trailing newline
+                  # for example use `echo -n "password" > /tmp/secret.key`
+                  allowDiscards = true;
+                };
+                # additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
+                content = {
+                  type = "zfs";
+                  pool = "zroot";
+                };
               };
             };
           };
@@ -43,14 +55,11 @@
         options.ashift = "12";
 
         datasets = {
+          "k8s" = {
+            type = "zfs_fs";
+          };
           "root" = {
             type = "zfs_fs";
-            options = {
-              encryption = "aes-256-gcm";
-              keyformat = "passphrase";
-              #keylocation = "file:///tmp/secret.key";
-              keylocation = "prompt";
-            };
             mountpoint = "/";
           };
           "root/nix" = {
