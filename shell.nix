@@ -7,6 +7,7 @@ mkShell {
   packages = [
     flux
     kubectl
+    kubectx
     sops
     age
     headscale
