@@ -47,7 +47,6 @@ spec:
             name: plugins
     configuration:
       namespace: velero
-      features: EnableCSI
       logLevel: debug
       backupStorageLocation:
         - name: r2
