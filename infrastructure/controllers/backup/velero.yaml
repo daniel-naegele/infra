@@ -32,6 +32,8 @@ spec:
       image:
         repository: public.ecr.aws/bitnami/kubectl
         tag: latest
+    credentials:
+      existingSecret: velero-auth
     initContainers:
       - name: openebs-plugin
         image: openebs/velero-plugin:3.6.0
