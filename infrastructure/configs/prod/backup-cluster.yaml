@@ -1,0 +1,121 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: backup-cluster
+  namespace: rook-ceph
+spec:
+  releaseName: backup-cluster
+  chart:
+    spec:
+      chart: rook-ceph-cluster
+      sourceRef:
+        kind: HelmRepository
+        name: rook-ceph
+  interval: 50m
+  install:
+    remediation:
+      retries: 3
+  values:
+    clusterName: backup-cluster
+    toolbox:
+      enabled: true
+    monitoring:
+      enabled: true
+    cephClusterSpec:
+      dataDirHostPath: /var/lib/backup-rook
+      dashboard:
+        enabled: true
+      storage:
+        nodes:
+          - name: de-man1-01
+            devices:
+              - name: /dev/disk/by-id/usb-WD_Elements_2620_575852314539393930563943-0:0
+                config:
+                  osdsPerDevice: 1
+                  crushDeviceClass: hdd
+              - name: /dev/disk/by-id/usb-WD_My_Passport_259F_575834314543354559504E30-0:0
+                config:
+                  osdsPerDevice: 1
+                  crushDeviceClass: hdd
+              - name: /dev/disk/by-id/usb-ADATA_HV620S_494303AB2017-0:0
+                config:
+                  osdsPerDevice: 1
+                  crushDeviceClass: hdd
+        config:
+          encryptedDevice: true
+      mon:
+        count: 1
+        allowMultiplePerNode: true
+      mgr:
+        count: 1
+        modules:
+          - name: rook
+            enabled: true
+          - name: rgw
+      resources:
+        mgr:
+          limits:
+            memory: "4Gi"
+          requests:
+            cpu: "10m"
+            memory: "128Mi"
+        mds:
+          limits:
+            memory: "4Gi"
+          requests:
+            cpu: "10m"
+            memory: "128Mi"
+        mon:
+          limits:
+            memory: "4Gi"
+          requests:
+            cpu: "10m"
+            memory: "128Mi"
+        osd:
+          limits:
+            memory: "4Gi"
+          requests:
+            cpu: "10m"
+            memory: "128Mi"
+    ingress:
+      dashboard:
+        enabled: true
+        ingressClassName: traefik
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          traefik.ingress.kubernetes.io/router.middlewares: default-redirect-https@kubernetescrd
+        tls:
+          - secretName: rook-tls
+            hosts:
+              - ceph-backup.men.sh
+        hosts:
+          - host: ceph-backup.men.sh
+            paths:
+              - path: /
+                pathType: Prefix
+    cephBlockPools: []
+    cephFileSystems: []
+    cephObjectStores:
+      - name: backup-objectstore
+        spec:
+          metadataPool:
+            failureDomain: osd
+            replicated:
+              size: 2
+          dataPool:
+            failureDomain: osd
+            replicated:
+              size: 2
+          gateway:
+            instances: 1
+            port: 80
+            securePort: 443
+        storageClass:
+          enabled: true
+          name: ceph-bucket-backup
+          reclaimPolicy: Delete
+          volumeBindingMode: "Immediate"
+          annotations: {}
+          parameters:
+            region: de-west-1
