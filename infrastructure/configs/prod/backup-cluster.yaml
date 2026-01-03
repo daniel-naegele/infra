@@ -32,18 +32,18 @@ spec:
             devices:
               - name: /dev/disk/by-id/usb-WD_Elements_2620_575852314539393930563943-0:0
                 config:
-                  osdsPerDevice: 1
+                  osdsPerDevice: "1"
                   crushDeviceClass: hdd
               - name: /dev/disk/by-id/usb-WD_My_Passport_259F_575834314543354559504E30-0:0
                 config:
-                  osdsPerDevice: 1
+                  osdsPerDevice: "1"
                   crushDeviceClass: hdd
               - name: /dev/disk/by-id/usb-ADATA_HV620S_494303AB2017-0:0
                 config:
-                  osdsPerDevice: 1
+                  osdsPerDevice: "1"
                   crushDeviceClass: hdd
         config:
-          encryptedDevice: true
+          encryptedDevice: "true"
       mon:
         count: 1
         allowMultiplePerNode: true
