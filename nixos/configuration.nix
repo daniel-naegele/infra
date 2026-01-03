@@ -106,7 +106,7 @@
   sops.secrets.k3s_token = {
     format = "binary";
     # can be also set per secret
-    sopsFile = ../secrets/k3s.bin;
+    sopsFile = ../secrets/shared/k3s.bin;
   };
 
   time.timeZone = "Europe/Berlin";

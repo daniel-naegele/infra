@@ -11,11 +11,16 @@
     ./disk-config.nix
     ./hardware-configuration.nix
     ../configuration.nix
-    #    ../k8s/bootstrap.nix
+    ../k8s/agent.nix
     ../secure-boot.nix
   ];
 
   sops.defaultSopsFile = ../../secrets/machines/de-man1-01.yaml;
+
+  services.k3s.extraFlags = [
+    "--node-ip=100.64.0.3"
+    "--flannel-iface=tailscale0"
+  ];
 
   networking = {
     hostId = "2054d6cd";
