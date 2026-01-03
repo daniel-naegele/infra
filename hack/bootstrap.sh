@@ -14,7 +14,7 @@ install -d -m755 "$temp/etc/ssh"
 
 # Generate machine key
 ssh-keygen -t ed25519 -f "$temp/etc/ssh/ssh_host_ed25519_key" -N ""
-# Generate pubic key and convert to age
+# Generate public key and convert to age
 ssh-keygen -f "$temp/etc/ssh/ssh_host_ed25519_key" -y | nix run nixpkgs#ssh-to-age --
 
 # Set the correct permissions so sshd will accept the key
@@ -41,7 +41,7 @@ ssh_port=${ssh_port:-22}
 chmod 600 "$temp/etc/ssh/ssh_host_ed25519_key"
 
 # provide FDE key and output raw
-sops -d "secrets/$machine_hostname.yaml" | yq '.fde_pass' -r > /tmp/disk-1.key
+sops -d "secrets/machines/$machine_hostname.yaml" | yq '.fde_pass' -r > /tmp/disk-1.key
 
 # Install NixOS to the host system with our secrets
 nix run github:nix-community/nixos-anywhere -- \

@@ -15,7 +15,7 @@
     ../secure-boot.nix
   ];
 
-  sops.defaultSopsFile = ../../secrets/de-man1-01.yaml;
+  sops.defaultSopsFile = ../../secrets/machines/de-man1-01.yaml;
 
   networking = {
     hostId = "2054d6cd";

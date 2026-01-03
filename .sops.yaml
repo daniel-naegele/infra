@@ -5,9 +5,9 @@
 keys:
   # Personal key for me
   - &admin_daniel age1yvcq2p43h023m8ds5qjyc96p48kd4p4f8f7hux8dsjcv7tfehvaqjut87h
+  - &admin_backup age1yzhxreet79v0hk8wzsqxtrn3fvala7zk5edxa85ydaxum8jfa9tsa0kjck
   # Decryption key for the Kubernetes cluster
-  - &machine_k8s age13vnmsvg4s2uxzz4rm3apnt4dpczc5njans0el4d3glx92atynf8sla5l7x
-  - &bootstrap age1pua3x7g9qxwy4tzvl640smthfzqk08f7zws2ucjd3t40dm9m0pasm4meqx
+  - &bootstrap_k8s age13vnmsvg4s2uxzz4rm3apnt4dpczc5njans0el4d3glx92atynf8sla5l7x
   # Private key from NUC machine (not the initrd host key)
   - &machine_de-man1-01 age10jewvf359nwnyklmugd42maw7ukk0qcq09h4uy3aa4jkq5a3cqcq962hfc
   - &machine_de-fsn1-01 age18rsr24209nzg82zsmhxnw35xtmf4fukmxfdxdl9luper0rn5vytshr75ps
@@ -19,12 +19,36 @@ creation_rules:
     key_groups:
       - age:
           - *admin_daniel
-          - *machine_k8s
-  - path_regex: secrets\/[^/]+\.(yaml|json|env|ini|bin)$
+          - *admin_backup
+          - *bootstrap_k8s
+  - path_regex: secrets\/privileged\/.*\.(yaml|json|env|ini|bin)$
     key_groups:
       - age:
           - *admin_daniel
-          - *bootstrap
+          - *admin_backup
+  - path_regex: secrets\/shared\/[^/]+\.(yaml|json|env|ini|bin)$
+    key_groups:
+      - age:
+          - *admin_daniel
+          - *admin_backup
           - *machine_de-man1-01
           - *machine_de-fsn1-01
           - *machine_de-stg1-01
+  - path_regex: secrets\/machines\/de-fsn1-01\.yaml$
+    key_groups:
+      - age:
+          - *admin_daniel
+          - *admin_backup
+          - *machine_de-fsn1-01
+  - path_regex: secrets\/machines\/de-stg1-01\.yaml$
+    key_groups:
+      - age:
+          - *admin_daniel
+          - *admin_backup
+          - *machine_de-stg1-01
+  - path_regex: secrets\/machines\/de-man1-01\.yaml$
+    key_groups:
+      - age:
+          - *admin_daniel
+          - *admin_backup
+          - *machine_de-man1-01

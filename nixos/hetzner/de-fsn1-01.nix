@@ -15,7 +15,7 @@
     ../bios-boot.nix
   ];
 
-  sops.defaultSopsFile = ../../secrets/de-fsn1-01.yaml;
+  sops.defaultSopsFile = ../../secrets/machines/de-fsn1-01.yaml;
 
   services.k3s.extraFlags = [
     "--node-ip=100.64.0.1"

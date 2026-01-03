@@ -16,7 +16,7 @@
     ../secure-boot.nix
   ];
 
-  sops.defaultSopsFile = ../../secrets/de-stg1-01.yaml;
+  sops.defaultSopsFile = ../../secrets/machines/de-stg1-01.yaml;
 
   services.k3s.extraFlags = [
     "--node-ip=100.64.0.2"
