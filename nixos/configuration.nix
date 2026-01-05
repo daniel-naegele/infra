@@ -61,6 +61,7 @@
     clevis
     git
     htop
+    lvm2
     iproute2
     openssh
     vim
@@ -68,6 +69,7 @@
     inputs.unstable.legacyPackages.${pkgs.system}.sbctl
     tailscale
     tcpdump
+    tmux
   ];
 
   security.sudo.wheelNeedsPassword = false;

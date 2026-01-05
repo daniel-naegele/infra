@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   ...
 }:
 {
@@ -13,4 +14,8 @@
   networking.firewall.interfaces."tailscale0".allowedUDPPorts = [
     8472 # k3s, flannel: required if using multi-node for inter-node networking
   ];
+
+  systemd.services.containerd.serviceConfig = {
+    LimitNOFILE = lib.mkForce null;
+  };
 }
