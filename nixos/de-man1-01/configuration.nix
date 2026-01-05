@@ -20,6 +20,8 @@
   services.k3s.extraFlags = [
     "--node-ip=100.64.0.3"
     "--flannel-iface=tailscale0"
+    "--node-taint=workload=backup:NoSchedule"
+    "--node-label=workload=backup"
   ];
 
   networking = {
