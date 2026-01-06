@@ -27,7 +27,7 @@ spec:
           enabled: true
           name: Zitadel
           allow_sign_up: true
-          client_id: 354276597043298349
+          client_id: "354276597043298349"
           client_secret: $__env{GRAFANA_OAUTH_CLIENT_SECRET}
 
           scopes: openid profile email
