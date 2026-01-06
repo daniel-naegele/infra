@@ -17,8 +17,27 @@ spec:
       interval: 12h
   values:
     grafana:
+      envFromSecret: "grafana-oauth"
       admin:
         existingSecret: grafana-admin
+      grafana.ini:
+        server:
+          root_url: https://grafana.dev.men.sh
+        auth.generic_oauth:
+          enabled: true
+          name: Zitadel
+          allow_sign_up: true
+          client_id: 354276597043298349
+          client_secret: $__env{GRAFANA_OAUTH_CLIENT_SECRET}
+
+          scopes: openid profile email
+          auth_url: https://welcher.men.sh/oauth/v2/authorize
+          token_url: https://welcher.men.sh/oauth/v2/token
+          api_url: https://welcher.men.sh/oidc/v1/userinfo
+
+          email_attribute_name: email
+          login_attribute_path: preferred_username
+          name_attribute_path: name
       ingress:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
