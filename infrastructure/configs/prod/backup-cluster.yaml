@@ -30,15 +30,15 @@ spec:
         nodes:
           - name: de-man1-01
             devices:
-              - name: /dev/disk/by-id/usb-WD_Elements_2620_575852314539393930563943-0:0
+              - name: /dev/disk/by-id/ata-WDC_WD50NDZW-11MR8S1_WD-WXR1E9990V9C
                 config:
                   osdsPerDevice: "1"
                   crushDeviceClass: hdd
-              - name: /dev/disk/by-id/usb-WD_My_Passport_259F_575834314543354559504E30-0:0
+              - name: /dev/disk/by-id/ata-WDC_WD20NMVW-11EDZS6_WD-WX41EC5EYPN0
                 config:
                   osdsPerDevice: "1"
                   crushDeviceClass: hdd
-              - name: /dev/disk/by-id/usb-ADATA_HV620S_494303AB2017-0:0
+              - name: /dev/disk/by-id/ata-ST2000LM007-1R8174_WDZK4PLR
                 config:
                   osdsPerDevice: "1"
                   crushDeviceClass: hdd
