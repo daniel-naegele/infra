@@ -10,6 +10,7 @@ mkShell {
     kubectx
     sops
     age
+    go
     headscale
     yq
     kubernetes-helm
