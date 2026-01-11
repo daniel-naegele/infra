@@ -5,6 +5,7 @@
 with pkgs;
 mkShell {
   packages = [
+    dagger
     flux
     kubectl
     kubectx
