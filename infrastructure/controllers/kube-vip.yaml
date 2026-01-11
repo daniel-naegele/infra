@@ -16,7 +16,6 @@ spec:
   chart:
     spec:
       chart: kube-vip
-      version: "0.23.x"
       sourceRef:
         kind: HelmRepository
         name: kube-vip
