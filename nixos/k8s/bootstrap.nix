@@ -14,6 +14,8 @@
     extraFlags = [
       "--tls-san=controlplane.men.sh,de-fsn1-01,100.64.0.14"
       "--disable=local-storage"
+      "--write-kubeconfig-group=nixos"
+      "--write-kubeconfig-mode=0640"
     ];
   };
 }
