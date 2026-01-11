@@ -22,6 +22,8 @@ spec:
         namespace: flux-system
       interval: 12h
   values:
+    config:
+      address: "10.254.254.254"
     env:
       vip_leaderelection: "true"
       vip_arp: "false"
