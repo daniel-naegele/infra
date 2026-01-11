@@ -66,6 +66,7 @@
     openssh
     vim
     wget
+    wireguard-tools
     inputs.unstable.legacyPackages.${pkgs.system}.sbctl
     tailscale
     tcpdump
@@ -104,12 +105,6 @@
 
   services.zfs.autoScrub.enable = true;
   services.tailscale.enable = true;
-
-  sops.secrets.k3s_token = {
-    format = "binary";
-    # can be also set per secret
-    sopsFile = ../secrets/shared/k3s.bin;
-  };
 
   time.timeZone = "Europe/Berlin";
 }

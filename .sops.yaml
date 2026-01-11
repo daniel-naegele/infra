@@ -26,7 +26,7 @@ creation_rules:
       - age:
           - *admin_daniel
           - *admin_backup
-  - path_regex: secrets\/shared\/[^/]+\.(yaml|json|env|ini|bin)$
+  - path_regex: secrets\/shared\/[^/]+\.(yaml|json|env|ini|bin|key)$
     key_groups:
       - age:
           - *admin_daniel
