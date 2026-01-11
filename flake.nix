@@ -5,6 +5,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     sops-nix.url = "github:Mic92/sops-nix";
+    dagger.url = "github:dagger/nix";
+    dagger.inputs.nixpkgs.follows = "nixpkgs";
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     lanzaboote.url = "github:nix-community/lanzaboote/v1.0.0";
@@ -23,12 +25,16 @@
       nixpkgs,
       sops-nix,
       disko,
+      dagger,
       nixos-generators,
       lanzaboote,
       ...
     }@inputs:
     with inputs.nixpkgs.lib;
     let
+      daggerOverlay = system: final: prev: {
+        dagger = dagger.packages.${system}.dagger;
+      };
 
       supportedSystems = [
         "x86_64-linux"
@@ -41,6 +47,7 @@
           f {
             pkgs = import nixpkgs {
               inherit system;
+              overlays = [ (daggerOverlay system) ];
             };
           }
         );

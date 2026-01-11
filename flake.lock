@@ -15,6 +15,26 @@
         "type": "github"
       }
     },
+    "dagger": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1767828339,
+        "narHash": "sha256-ZGz/j8PK5mTd4dLVf+1vn6HoliO9DBC/yhLnxTxxpks=",
+        "owner": "dagger",
+        "repo": "nix",
+        "rev": "6906a3d0b8ee02a5f9565cbea0f372f8c99e4146",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dagger",
+        "repo": "nix",
+        "type": "github"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -205,6 +225,7 @@
     },
     "root": {
       "inputs": {
+        "dagger": "dagger",
         "disko": "disko",
         "lanzaboote": "lanzaboote",
         "nixos-generators": "nixos-generators",
