@@ -28,8 +28,9 @@ spec:
       address: "10.254.254.254"
     env:
       vip_leaderelection: "true"
-      vip_arp: "true"
+      vip_arp: "false"
       vip_interface: "lo"
+      vip_wireguard: "true"
       bog_enable: "false"
       cp_enable: "true"
       svc_enable: "false"
