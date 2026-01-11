@@ -1,5 +1,19 @@
 apiVersion: v1
 entries:
+  kube-vip:
+  - apiVersion: v2
+    appVersion: v1.0.3
+    created: "2026-01-11T20:38:38.789501532Z"
+    description: A Helm chart for kube-vip
+    digest: 7082b5689ae1fd46ab7eb1b7c10b3cc29656ec2cfc95fac745caba3cf3c6062f
+    icon: https://github.com/kube-vip/kube-vip/raw/main/kube-vip.png
+    maintainers:
+    - name: kube-vip
+    name: kube-vip
+    type: application
+    urls:
+    - https://github.com/daniel-naegele/infra/releases/download/kube-vip-0.9.5/kube-vip-0.9.5.tgz
+    version: 0.9.5
   velero-encrypt:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -71,4 +85,4 @@ entries:
     urls:
     - https://github.com/daniel-naegele/infra/releases/download/velero-encrypt-0.1.0/velero-encrypt-0.1.0.tgz
     version: 0.1.0
-generated: "2025-12-12T02:53:57.009935535Z"
+generated: "2026-01-11T20:38:38.789522602Z"
