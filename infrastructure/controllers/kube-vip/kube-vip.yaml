@@ -26,8 +26,7 @@ spec:
       repository: ghcr.io/daniel-naegele/kube-vip
       pullPolicy: Always
     config:
-      address: "84.19.175.168/32"
-
+      address: "10.0.1.10/32"
     env:
       vip_leaderelection: "true"
       vip_arp: "false"
