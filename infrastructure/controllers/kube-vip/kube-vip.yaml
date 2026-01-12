@@ -24,6 +24,7 @@ spec:
   values:
     image:
       repository: ghcr.io/daniel-naegele/kube-vip
+      tag: dev
       pullPolicy: Always
     config:
       address: "10.0.1.10/32"
