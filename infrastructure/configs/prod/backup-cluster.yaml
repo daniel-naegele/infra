@@ -25,7 +25,7 @@ spec:
   values:
     clusterName: backup-cluster
     toolbox:
-      enabled: true
+      enabled: false
     monitoring:
       enabled: true
     cephClusterSpec:
