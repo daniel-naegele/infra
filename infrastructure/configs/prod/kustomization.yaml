@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - backup-cluster.yaml
   - prod-cluster.yaml
+  - migration.yaml
