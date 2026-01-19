@@ -108,7 +108,7 @@ spec:
             replicated:
               size: 2
           gateway:
-            instances: 2
+            instances: 1
             port: 80
             securePort: 443
         storageClass:
