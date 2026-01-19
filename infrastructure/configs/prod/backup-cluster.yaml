@@ -1,9 +1,14 @@
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: backup
+---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: backup-cluster
-  namespace: rook-ceph
+  namespace: backup
 spec:
   releaseName: backup-cluster
   chart:
@@ -12,6 +17,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: rook-ceph
+
   interval: 50m
   install:
     remediation:
