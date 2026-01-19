@@ -84,6 +84,23 @@ spec:
           requests:
             cpu: "10m"
             memory: "128Mi"
+      placement:
+        all:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: workload
+                      operator: In
+                      values:
+                        - backup
+          podAffinity:
+          podAntiAffinity:
+          topologySpreadConstraints:
+          tolerations:
+            - key: workload
+              operator: "Equal"
+              value: "backup"
     ingress:
       dashboard:
         enabled: true
