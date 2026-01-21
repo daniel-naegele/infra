@@ -10,7 +10,7 @@ spec:
   storageClassName: ceph-filesystem
   resources:
     requests:
-      storage: 1.6Ti
+      storage: 2Ti
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
