@@ -10,6 +10,8 @@ let
     kind: KubeletConfiguration
     allowedUnsafeSysctls:
       - net.ipv4.conf.all.src_valid_mark
+      - net.ipv4.ip_forward
+      - net.ipv6.conf.all.forwarding
   '';
 in
 {
