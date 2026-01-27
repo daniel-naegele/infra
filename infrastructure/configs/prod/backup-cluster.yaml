@@ -66,12 +66,6 @@ spec:
           requests:
             cpu: "10m"
             memory: "128Mi"
-        mds:
-          limits:
-            memory: "4Gi"
-          requests:
-            cpu: "10m"
-            memory: "128Mi"
         mon:
           limits:
             memory: "4Gi"
@@ -101,6 +95,7 @@ spec:
             - key: workload
               operator: "Equal"
               value: "backup"
+              effect: "NoSchedule"
     ingress:
       dashboard:
         enabled: true
