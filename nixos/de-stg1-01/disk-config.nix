@@ -36,8 +36,8 @@
                 };
                 # additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
                 content = {
-                  type = "zfs";
-                  pool = "zroot";
+                  type = "lvm_pv";
+                  vg = "pool";
                 };
               };
             };
@@ -70,6 +70,23 @@
             type = "zfs_fs";
             options.mountpoint = "/nix";
             mountpoint = "/nix";
+          };
+        };
+      };
+    };
+    lvm_vg = {
+      pool = {
+        type = "lvm_vg";
+        lvs = {
+          zpool = {
+            size = "100%";
+            content = {
+              type = "zfs";
+              pool = "zroot";
+            };
+          };
+          osd = {
+            size = "500G";
           };
         };
       };

@@ -38,6 +38,14 @@ spec:
                 config:
                   osdsPerDevice: "1"
                   crushDeviceClass: hdd
+              - name: /dev/disk/by-id/nvme-SanDisk_Extreme_Pro_500GB_20470J800180
+                config:
+                  osdPerDevice: "1"
+                  crushDeviceClass: nvme
+              - name: /dev/disk/by-id/dm-name-pool-osd
+                config:
+                  osdPerDevice: "1"
+                  crushDeviceClass: nvme
         config:
           encryptedDevice: "true"
       mon:
@@ -73,10 +81,12 @@ spec:
         spec:
           metadataPool:
             failureDomain: osd
+            deviceClass: nvme
             replicated:
               size: 2
           dataPools:
             - failureDomain: osd
+              deviceClass: hdd
               replicated:
                 size: 2
               name: data0

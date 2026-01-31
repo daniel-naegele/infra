@@ -11,7 +11,7 @@ keys:
   # Private key from NUC machine (not the initrd host key)
   - &machine_de-man1-01 age10jewvf359nwnyklmugd42maw7ukk0qcq09h4uy3aa4jkq5a3cqcq962hfc
   - &machine_de-fsn1-01 age18rsr24209nzg82zsmhxnw35xtmf4fukmxfdxdl9luper0rn5vytshr75ps
-  - &machine_de-stg1-01 age1prfckknfw0nru53kwxd3965dyqwkfkjafut5ezvd6u2mng2kf92qxp9vw6
+  - &machine_de-stg1-01 age1gtjk9pv93wt538wpgv4lcqmrsjf37u6h5eu3dzv8s4vlwza5t9lsq9avu4
 creation_rules:
   # This is used for Kubernetes secrets
   - path_regex: (infrastructure|apps|clusters)\/.+\.(yaml|json|env|ini|bin)$
