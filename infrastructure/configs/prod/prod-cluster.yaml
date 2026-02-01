@@ -80,7 +80,6 @@ spec:
           enableCrushUpdates: true
           replicated:
             size: 3
-
         storageClass:
           enabled: false
     cephObjectStores: []
