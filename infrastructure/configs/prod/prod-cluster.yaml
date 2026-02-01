@@ -27,6 +27,11 @@ spec:
       dashboard:
         enabled: true
       storage:
+        useAllDevices: false
+        useAllNodes: false
+        config:
+          encryptedDevice: "false"
+          osdPerDevice: "1"
         nodes:
           - name: de-stg1-01
             devices:
@@ -39,12 +44,9 @@ spec:
               - name: /dev/disk/by-id/nvme-SanDisk_Extreme_Pro_500GB_20470J800180
                 config:
                   crushDeviceClass: nvme
-              - name: /dev/disk/by-id/dm-name-pool-osd
+              - name: /dev/disk/by-id/dm-uuid-LVM-ARxaEYwOivrrQihUwiCDh04KVa35eM3L3yt4DInSVTNfPs8gb917tcqYvlSNbyJ2
                 config:
                   crushDeviceClass: nvme
-        config:
-          encryptedDevice: "false"
-          osdPerDevice: "1"
       mon:
         count: 1
         allowMultiplePerNode: true
