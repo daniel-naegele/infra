@@ -89,7 +89,7 @@ spec:
         spec:
           metadataPool:
             failureDomain: osd
-            deviceClass: nvme
+            deviceClass: ssd
             name: cephfs-metadata
             replicated:
               size: 2
