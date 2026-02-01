@@ -90,6 +90,7 @@ spec:
           metadataPool:
             failureDomain: osd
             deviceClass: nvme
+            name: cephfs-metadata
             replicated:
               size: 2
           dataPools:
