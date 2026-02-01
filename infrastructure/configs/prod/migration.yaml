@@ -51,37 +51,48 @@ spec:
     requests:
       storage: 300Gi
 ---
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: cephfs-migrator
   namespace: default
 spec:
-  containers:
-    - name: migrator
-      image: ubuntu:22.04
-      command: ["/bin/bash", "-c", "sleep infinity"]
-      securityContext:
-        runAsUser: 0
-      volumeMounts:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cephfs-migrator
+  template:
+    metadata:
+      labels:
+        app: cephfs-migrator
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: de-stg1-01 # replace with the target node name
+      containers:
+        - name: migrator
+          image: ubuntu:22.04
+          command: ["/bin/bash", "-c", "sleep infinity"]
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - name: media
+              mountPath: /mnt/media
+            - name: nextcloud
+              mountPath: /mnt/nextcloud
+            - name: backup
+              mountPath: /mnt/backup
+            - name: vault
+              mountPath: /mnt/vault
+      volumes:
         - name: media
-          mountPath: /mnt/media
+          persistentVolumeClaim:
+            claimName: media
         - name: nextcloud
-          mountPath: /mnt/nextcloud
+          persistentVolumeClaim:
+            claimName: nextcloud
         - name: backup
-          mountPath: /mnt/backup
+          persistentVolumeClaim:
+            claimName: backup
         - name: vault
-          mountPath: /mnt/vault
-  volumes:
-    - name: media
-      persistentVolumeClaim:
-        claimName: media
-    - name: nextcloud
-      persistentVolumeClaim:
-        claimName: nextcloud
-    - name: backup
-      persistentVolumeClaim:
-        claimName: backup
-    - name: vault
-      persistentVolumeClaim:
-        claimName: vault
+          persistentVolumeClaim:
+            claimName: vault
