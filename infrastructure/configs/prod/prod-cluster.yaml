@@ -81,6 +81,7 @@ spec:
           metadataPool:
             failureDomain: osd
             deviceClass: nvme
+            name: cephfs-metadata
             replicated:
               size: 2
           dataPools:
@@ -88,7 +89,7 @@ spec:
               deviceClass: hdd
               replicated:
                 size: 2
-              name: data0
+              name: cephfs-data0
           metadataServer:
             activeCount: 1
             activeStandby: false
