@@ -72,7 +72,17 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-    cephBlockPools: []
+    cephBlockPools:
+      - name: builtin-mgr
+        spec:
+          name: .mgr
+          failureDomain: osd
+          enableCrushUpdates: true
+          replicated:
+            size: 3
+
+        storageClass:
+          enabled: false
     cephObjectStores: []
     cephFileSystems:
       - name: ceph-filesystem
