@@ -101,7 +101,7 @@ spec:
               name: cephfs-data0
           metadataServer:
             activeCount: 1
-            activeStandby: false
+            activeStandby: true
             resources:
               limits:
                 memory: "32Gi"
