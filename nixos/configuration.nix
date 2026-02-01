@@ -58,11 +58,13 @@
   environment.systemPackages = with pkgs; [
     btop
     cachix
+    ceph
     clevis
     git
     htop
     lvm2
     iproute2
+    lsof
     openssh
     vim
     wget

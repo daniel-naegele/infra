@@ -32,22 +32,19 @@ spec:
             devices:
               - name: /dev/disk/by-id/ata-ST16000NM000J-2TW103_ZR5652PC
                 config:
-                  osdsPerDevice: "1"
                   crushDeviceClass: hdd
               - name: /dev/disk/by-id/ata-ST16000NM000J-2TW103_ZR55K5Z2
                 config:
-                  osdsPerDevice: "1"
                   crushDeviceClass: hdd
               - name: /dev/disk/by-id/nvme-SanDisk_Extreme_Pro_500GB_20470J800180
                 config:
-                  osdPerDevice: "1"
                   crushDeviceClass: nvme
               - name: /dev/disk/by-id/dm-name-pool-osd
                 config:
-                  osdPerDevice: "1"
                   crushDeviceClass: nvme
         config:
-          encryptedDevice: "true"
+          encryptedDevice: "false"
+          osdPerDevice: "1"
       mon:
         count: 1
         allowMultiplePerNode: true
