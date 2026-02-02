@@ -100,13 +100,13 @@ spec:
                 size: 2
               name: cephfs-data0
           metadataServer:
-            activeCount: 1
-            activeStandby: true
+            activeCount: 2
+            activeStandby: false
             resources:
               limits:
-                memory: "32Gi"
+                memory: "16Gi"
               requests:
-                cpu: "1000m"
+                cpu: "100m"
                 memory: "4Gi"
             priorityClassName: system-cluster-critical
         storageClass:
