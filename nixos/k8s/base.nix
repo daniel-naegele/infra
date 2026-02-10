@@ -29,7 +29,7 @@ in
     serverAddr = "https://controlplane.men.sh:6443";
   };
 
-  networking.firewall.interfaces."tailscale0".allowedUDPPorts = [
+  networking.firewall.interfaces."tun0".allowedUDPPorts = [
     8472 # k3s, flannel: required if using multi-node for inter-node networking
   ];
 
