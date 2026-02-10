@@ -17,9 +17,13 @@
 
   sops.defaultSopsFile = ../../secrets/machines/de-man1-01.yaml;
 
+  services.easytier.instances.overlay.settings = {
+    ipv4 = "100.64.0.3";
+  };
+
   services.k3s.extraFlags = [
     "--node-ip=100.64.0.3"
-    "--flannel-iface=tailscale0"
+    "--flannel-iface=tun0"
     "--node-taint=workload=backup:NoSchedule"
     "--node-label=workload=backup"
   ];

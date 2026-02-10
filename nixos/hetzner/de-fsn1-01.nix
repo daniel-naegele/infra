@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
+  lib,
   ...
 }:
 {
@@ -19,8 +20,22 @@
 
   services.k3s.extraFlags = [
     "--node-ip=100.64.0.1"
-    "--flannel-iface=tailscale0"
+    "--flannel-iface=tun0"
   ];
+
+  services.easytier = {
+    instances.overlay.settings = {
+      ipv4 = "100.64.0.1";
+
+      # Override the default peer list - this is the bootstrap node
+      peers = lib.mkForce [ ];
+
+      listeners = [
+        "tcp://0.0.0.0:11010"
+        "udp://0.0.0.0:11010"
+      ];
+    };
+  };
 
   networking = {
     hostId = "f4f9b7d5";

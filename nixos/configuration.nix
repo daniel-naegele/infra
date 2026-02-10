@@ -9,6 +9,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./initrd.nix
+    ./connectivity.nix
   ];
 
   boot.kernelParams = [

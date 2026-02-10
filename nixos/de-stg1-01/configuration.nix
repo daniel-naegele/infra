@@ -19,9 +19,13 @@
   sops.defaultSopsFile = ../../secrets/machines/de-stg1-01.yaml;
 
   services.k3s.extraFlags = [
-    "--node-ip=100.64.0.11"
-    "--flannel-iface=tailscale0"
+    "--node-ip=100.64.0.2"
+    "--flannel-iface=tun0"
   ];
+
+  services.easytier.instances.overlay.settings = {
+    ipv4 = "100.64.0.2";
+  };
 
   networking = {
     hostId = "945ece5e";
