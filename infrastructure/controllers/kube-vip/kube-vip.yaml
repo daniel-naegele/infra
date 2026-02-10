@@ -40,8 +40,8 @@ spec:
       vip_interface: "lo"
       vip_wireguard: "true"
       bog_enable: "false"
-      cp_enable: "true"
-      svc_enable: "false"
+      cp_enable: "false"
+      svc_enable: "true"
     nodeSelector:
       node-role.kubernetes.io/control-plane: "true"
     tolerations:
