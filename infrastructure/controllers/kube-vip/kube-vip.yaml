@@ -33,14 +33,14 @@ spec:
       tag: dev
       pullPolicy: Always
     config:
-      address: "84.19.175.168/32"
+      address: "217.64.151.159/32"
     env:
       vip_leaderelection: "true"
       vip_arp: "false"
       vip_interface: "lo"
       vip_wireguard: "true"
       bog_enable: "false"
-      cp_enable: "false"
+      cp_enable: "true"
       svc_enable: "true"
     nodeSelector:
       node-role.kubernetes.io/control-plane: "true"
