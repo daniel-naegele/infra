@@ -48,7 +48,7 @@ spec:
                 config:
                   crushDeviceClass: nvme
       mon:
-        count: 2
+        count: 3
         allowMultiplePerNode: true
         volumeClaimTemplate:
           spec:
