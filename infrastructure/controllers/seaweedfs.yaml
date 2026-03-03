@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: seaweedfs
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: seaweedfs
+  namespace: seaweedfs
+spec:
+  interval: 5m
+  url: https://seaweedfs.github.io/seaweedfs-operator/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: seaweedfs
+  namespace: seaweedfs
+spec:
+  releaseName: seaweedfs
+  chart:
+    spec:
+      chart: seaweedfs
+      sourceRef:
+        kind: HelmRepository
+        name: seaweedfs
+  interval: 50m
+  install:
+    remediation:
+      retries: 3
+  values:
+    webhook:
+      enabled: false

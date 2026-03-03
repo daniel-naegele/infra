@@ -14,6 +14,7 @@ mkShell {
     go
     headscale
     yq
+    k9s
     kubernetes-helm
     kube-capacity
     kubectl-view-secret
