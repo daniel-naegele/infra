@@ -64,7 +64,6 @@ spec:
               Pat:
                 ExpirationDate: "2029-01-01T00:00:00Z"
       dbSslCaCrtSecret: zitadel-pg-ca
-      dbSslAdminCrtSecret: zitadel-pg-server
 
     ingress:
       enabled: true

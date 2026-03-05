@@ -9,6 +9,9 @@ metadata:
   name: ww-gitops
   namespace: flux-system
 spec:
+  install:
+    remediation:
+      retries: 5
   chart:
     spec:
       chart: weave-gitops
