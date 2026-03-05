@@ -6,7 +6,7 @@ metadata:
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: seaweedfs
+  name: seaweedfs-operator
   namespace: seaweedfs
 spec:
   interval: 5m
@@ -15,16 +15,16 @@ spec:
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: seaweedfs
+  name: seaweedfs-operator
   namespace: seaweedfs
 spec:
-  releaseName: seaweedfs
+  releaseName: seaweedfs-operator
   chart:
     spec:
-      chart: seaweedfs
+      chart: seaweedfs-operator
       sourceRef:
         kind: HelmRepository
-        name: seaweedfs
+        name: seaweedfs-operator
   interval: 50m
   install:
     remediation:
