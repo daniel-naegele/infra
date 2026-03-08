@@ -5,6 +5,7 @@ resources:
   - ../base/headscale
   - ../base/weave-gitops
   - ../base/monitoring
+  - ../base/mailu
 #  - ../base/nextcloud
 #  - ../base/jellyfin
 patches:

@@ -1,0 +1,23 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: mailu-pg
+  namespace: mailu
+spec:
+  instances: 1
+  monitoring:
+    enablePodMonitor: true
+
+  storage:
+    size: 1Gi
+    storageClass: openebs-zfs
+  bootstrap:
+    initdb:
+      database: mailu
+      owner: mailu
+  enableSuperuserAccess: true
+
+  postgresql:
+    parameters:
+      max_connections: "100"
+      shared_buffers: "256MB"
