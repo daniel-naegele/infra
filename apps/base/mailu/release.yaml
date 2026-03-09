@@ -21,6 +21,15 @@ spec:
       - men.sh
     existingSecret: mailu-key
     timezone: Europe/Berlin
+    global:
+      storageClass: openebs-zfs
+    clamav:
+      persistence:
+        storageClass: openebs-zfs
+    redis:
+      master:
+        persistence:
+          storageClass: openebs-zfs
     front:
       hostPort:
         enabled: false
