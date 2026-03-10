@@ -34,6 +34,10 @@ spec:
       pullPolicy: Always
     config:
       address: "217.64.151.159/32"
+    envValueFrom:
+      vip_nodename:
+        fieldRef:
+          fieldPath: spec.nodeName
     env:
       vip_leaderelection: "true"
       vip_arp: "false"
