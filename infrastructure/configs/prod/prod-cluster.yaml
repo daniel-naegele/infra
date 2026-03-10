@@ -75,11 +75,10 @@ spec:
           - secretName: rook-tls
             hosts:
               - ceph.men.sh
-        hosts:
-          - host: ceph.men.sh
-            paths:
-              - path: /
-                pathType: Prefix
+        host:
+          name: ceph.men.sh
+          paths: "/"
+          pathType: Prefix
     cephBlockPools:
       - name: builtin-mgr
         spec:
