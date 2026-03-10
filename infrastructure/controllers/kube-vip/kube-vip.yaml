@@ -42,6 +42,7 @@ spec:
       bog_enable: "false"
       cp_enable: "true"
       svc_enable: "true"
+      vip_loglevel: "-4"
     nodeSelector:
       node-role.kubernetes.io/control-plane: "true"
     tolerations:
