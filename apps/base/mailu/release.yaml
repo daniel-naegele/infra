@@ -36,8 +36,8 @@ spec:
       externalService:
         enabled: true
         type: LoadBalancer
-        externalIPs:
-          - 217.64.151.159
+        annotations:
+          kube-vip.io/loadbalancerIPs: 217.64.151.159
     initialAccount:
       enable: true
       username: admin
