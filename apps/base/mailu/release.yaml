@@ -23,9 +23,13 @@ spec:
     timezone: Europe/Berlin
     global:
       storageClass: openebs-zfs
+    webmail:
+      type: snappymail
+      persistence:
+        storageClass: ceph-filesystem
     clamav:
       persistence:
-        storageClass: openebs-zfs
+        storageClass: ceph-filesystem
     redis:
       master:
         persistence:
@@ -33,12 +37,14 @@ spec:
     front:
       hostPort:
         enabled: false
+      kind: DaemonSet
       externalService:
-        externalTrafficPolicy: Cluster
+        externalTrafficPolicy: Local # needs to be local IP preservation
         enabled: true
         type: LoadBalancer
         annotations:
           kube-vip.io/loadbalancerIPs: 217.64.151.159
+
     initialAccount:
       enable: true
       username: admin
