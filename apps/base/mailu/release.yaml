@@ -34,6 +34,7 @@ spec:
       hostPort:
         enabled: false
       externalService:
+        externalTrafficPolicy: Cluster
         enabled: true
         type: LoadBalancer
         annotations:
