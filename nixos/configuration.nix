@@ -61,11 +61,13 @@
     cachix
     ceph
     clevis
+    conntrack-tools
     git
     htop
     lvm2
     iproute2
     lsof
+    nftables
     openssh
     vim
     wget
