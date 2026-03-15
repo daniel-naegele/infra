@@ -69,6 +69,7 @@
     lsof
     nftables
     openssh
+    pciutils
     vim
     wget
     wireguard-tools
