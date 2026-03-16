@@ -44,9 +44,9 @@ spec:
               - name: /dev/disk/by-id/nvme-SanDisk_Extreme_Pro_500GB_20470J800180
                 config:
                   crushDeviceClass: nvme
-              - name: /dev/pool/osd
-                config:
-                  crushDeviceClass: nvme
+              # - name: /dev/pool/osd
+              #   config:
+              #     crushDeviceClass: nvme
       mon:
         count: 3
         allowMultiplePerNode: true
