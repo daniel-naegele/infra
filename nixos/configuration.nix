@@ -70,13 +70,14 @@
     nftables
     openssh
     pciutils
-    vim
-    wget
-    wireguard-tools
     inputs.unstable.legacyPackages.${pkgs.system}.sbctl
+    smartmontools
     tailscale
     tcpdump
     tmux
+    vim
+    wget
+    wireguard-tools
   ];
 
   security.sudo.wheelNeedsPassword = false;
