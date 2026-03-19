@@ -1,3 +1,4 @@
+{ pkgs, lib, ... }:
 {
   system.activatable = false;
   networking.hostName = "nixos-install";

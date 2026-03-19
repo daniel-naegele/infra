@@ -19,6 +19,11 @@ mkShell {
     kube-capacity
     kubectl-view-secret
     velero
+
+    # Secure Boot signing tools
+    p7zip
+    sbsigntool
+    xorriso
   ];
 
   shellHook = ''

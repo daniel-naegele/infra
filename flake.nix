@@ -12,10 +12,6 @@
     lanzaboote.url = "github:nix-community/lanzaboote/v1.0.0";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   # Taken from https://github.com/davidtwco/veritas/blob/master/flake.nix
@@ -26,7 +22,6 @@
       sops-nix,
       disko,
       dagger,
-      nixos-generators,
       lanzaboote,
       ...
     }@inputs:
@@ -118,6 +113,12 @@
         }
       );
 
+      # Install media builders (ISO and kexec)
+      installMedia = import ./nixos/lib/install-media.nix {
+        inherit nixpkgs;
+        inherit (nixpkgs) lib;
+      };
+
       # Attribute set of hostnames to evaluated NixOS configurations. Consumed by `nixos-rebuild`
       # on those hosts.
       nixosHostConfigurations = mapAttrs' mkNixOsConfiguration {
@@ -139,6 +140,9 @@
       formatter = nixpkgs.nixfmt-rfc-style;
       nixosConfigurations = nixosHostConfigurations;
       devShells = mkDevShells;
-      packages.x86_64-linux.installationMedia = mkImage "install-iso" [ ./nixos/installer-image.nix ];
+      packages.x86_64-linux = {
+        iso = installMedia.buildIso { modules = [ ./nixos/installer-image.nix ]; };
+        kexec = installMedia.buildKexec { modules = [ ./nixos/installer-image.nix ]; };
+      };
     };
 }

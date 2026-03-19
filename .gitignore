@@ -81,3 +81,7 @@ fabric.properties
 .vscode
 
 erf93-ipv4.conf
+
+# Nix build outputs
+result
+result-*

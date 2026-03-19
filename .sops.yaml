@@ -21,7 +21,7 @@ creation_rules:
           - *admin_daniel
           - *admin_backup
           - *bootstrap_k8s
-  - path_regex: secrets\/privileged\/.*\.(yaml|json|env|ini|bin)$
+  - path_regex: secrets\/privileged\/.*\.(yaml|json|env|ini|bin|key)$
     key_groups:
       - age:
           - *admin_daniel
@@ -34,19 +34,19 @@ creation_rules:
           - *machine_de-man1-01
           - *machine_de-fsn1-01
           - *machine_de-stg1-01
-  - path_regex: secrets\/machines\/de-fsn1-01\.yaml$
+  - path_regex: secrets\/machines\/de-fsn1-01(\/.*|\.).*\.(yaml|key)$
     key_groups:
       - age:
           - *admin_daniel
           - *admin_backup
           - *machine_de-fsn1-01
-  - path_regex: secrets\/machines\/de-stg1-01\.yaml$
+  - path_regex: secrets\/machines\/de-stg1-01(\/.*|\.).*\.(yaml|key)$
     key_groups:
       - age:
           - *admin_daniel
           - *admin_backup
           - *machine_de-stg1-01
-  - path_regex: secrets\/machines\/de-man1-01\.yaml$
+  - path_regex: secrets\/machines\/de-man1-01(\/.*|\.).*\.(yaml|key)$
     key_groups:
       - age:
           - *admin_daniel
