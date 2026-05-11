@@ -13,6 +13,14 @@
 
 set -euo pipefail
 
+# Check for required tools (available in nix develop shell)
+for cmd in sbsign sops; do
+  if ! command -v "$cmd" &>/dev/null; then
+    echo "Error: '$cmd' not found. Run this script from 'nix develop' shell."
+    exit 1
+  fi
+done
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 

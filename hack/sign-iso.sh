@@ -13,6 +13,14 @@
 
 set -euo pipefail
 
+# Check for required tools (available in nix develop shell)
+for cmd in sbsign 7z xorriso sops; do
+  if ! command -v "$cmd" &>/dev/null; then
+    echo "Error: '$cmd' not found. Run this script from 'nix develop' shell."
+    exit 1
+  fi
+done
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
@@ -53,7 +61,7 @@ mkdir -p "$OUTPUT_DIR"
 echo "Building ISO..."
 nix build "$REPO_ROOT#packages.x86_64-linux.iso" -o "$OUTPUT_DIR/iso-unsigned"
 
-ISO_IN=$(find "$OUTPUT_DIR/iso-unsigned" -name "*.iso" | head -1)
+ISO_IN=$(find -L "$OUTPUT_DIR/iso-unsigned" -name "*.iso" | head -1)
 if [[ -z "$ISO_IN" ]]; then
   echo "Error: No ISO found in build output"
   exit 1
